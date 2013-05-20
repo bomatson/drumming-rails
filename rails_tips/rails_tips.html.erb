@@ -1,0 +1,42 @@
+<% if @user.awesome? %>
+  <form>
+<% end %>
+
+Model: the object itself, in the business sense, or database stuff
+  ## business logic == domain logic
+Controller: what to show when, and in which format
+View: HTML, plus variables or helper methods
+
+class User < AR::Base
+  def awesome?
+    authorized? && authorization == "awesome"
+  end
+end
+
+################
+
+<% if awesome_day? %>
+  <form>
+<% end %>
+
+module ApplicationHelper
+  def awesome_day?
+    Time.now == MyApp::AWESOME_DAY
+  end
+end
+
+Helper: package code which would otherwise go in the view
+
+module ApplicationHelper
+  def zebra_stripe
+    # display logic for structuring DOM, CSS classes, presentation details
+  end
+end
+
+# http://apidock.com/rails/Array/in_groups_of
+<% @user.kittens.in_groups_of(2) do |kittenA, kittenB| %>
+  <div class="dark-background"> <%= kittenA.name %> </div>
+  <div class="light-background"> <%= kittenB.name %> </div>
+<% end %>
+
+#################
