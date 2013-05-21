@@ -49,4 +49,15 @@ class StringTest < Test::Unit::TestCase
     assert_equal string[-4, 2], "IN"   
   end
 
+  def test_capitalize_method
+    string = "lowercase"
+
+    assert_equal string.capitalize, "Lowercase"
+
+    assert_equal string.capitalize!, "Lowercase"
+
+    assert_not_equal string, "lowercase"
+
+  end
+
 end

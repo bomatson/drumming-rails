@@ -5,6 +5,7 @@ describe 'String Test' do
 
   let(:string) {"This is my test"}
   let(:second_string) {"      unstripped      "}
+  let(:lowercase_string) {"lowercase"}
 
   it 'should match on string length' do
     
@@ -51,4 +52,12 @@ describe 'String Test' do
     string[0..4].should eq("This ") 
   end
 
+  it 'should properly use the capitalize method' do
+    string.capitalize.should eq(string)
+
+    lowercase_string.capitalize!.should eq("Lowercase")
+    lowercase_string.capitalize!.should be_nil
+    #with the bang version of capitalize, the capitalize method returns 
+    #nil if the operation has already been performed
+  end
 end

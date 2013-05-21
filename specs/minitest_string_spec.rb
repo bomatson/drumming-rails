@@ -21,6 +21,7 @@ class TestString < Minitest::Test
     assert_equal "unstrippede" <=> @unstripped.strip, 1
     assert_equal "unstrip" <=> @unstripped.strip, -1
     assert_equal @test.length <=> @unstripped.strip, nil
+
   end
 
   def test_concat_method
@@ -42,7 +43,12 @@ class TestString < Minitest::Test
     assert_equal @soup[0..2], "sou"
     refute_equal @soup[0], "u"
   end
+
+  def test_capitalize_method
+    assert_equal @soup.capitalize , "Soup"
+    refute_equal @soup.capitalize, @soup
+
+    assert_equal @unstripped.capitalize, @unstripped
+    #since the first char is a space, there is no char to capitalize
+  end
 end
-
-
-#refactor to make instance variables work
