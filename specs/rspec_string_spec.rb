@@ -6,6 +6,7 @@ describe 'String Test' do
   let(:string) {"This is my test"}
   let(:second_string) {"      unstripped      "}
   let(:lowercase_string) {"lowercase"}
+  let(:carriage) {"heyo\n"}
 
   it 'should match on string length' do
     
@@ -59,5 +60,12 @@ describe 'String Test' do
     lowercase_string.capitalize!.should be_nil
     #with the bang version of capitalize, the capitalize method returns 
     #nil if the operation has already been performed
+  end
+
+  it 'should chomp off a carriage return and use chomp! properly' do
+    string.chomp.should eq(string)
+    string.chomp!.should eq(nil)
+    carriage.chomp.should eq("heyo")
+
   end
 end

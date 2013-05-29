@@ -53,11 +53,18 @@ class StringTest < Test::Unit::TestCase
     string = "lowercase"
 
     assert_equal string.capitalize, "Lowercase"
-
     assert_equal string.capitalize!, "Lowercase"
-
     assert_not_equal string, "lowercase"
 
+  end
+
+  def test_chomp_method
+    string = "heyo\n"
+    another_string = "test"
+
+    assert_equal string.chomp, "heyo"
+    assert_not_equal string.chomp, "heyo\n"
+    assert_equal another_string.chomp!, nil
   end
 
 end

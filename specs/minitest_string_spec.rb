@@ -51,4 +51,13 @@ class TestString < Minitest::Test
     assert_equal @unstripped.capitalize, @unstripped
     #since the first char is a space, there is no char to capitalize
   end
+
+  def test_chomp_method
+    refute_equal "heyo\n".chomp, "heyo\n"
+    assert_equal "heyo\n".chomp, "heyo"
+    assert_equal @soup.chomp("p"), "sou"
+    assert_equal @test.chomp!, nil
+    assert_equal @test.chomp, "This is my test and I can cry if I want to"
+
+  end
 end
