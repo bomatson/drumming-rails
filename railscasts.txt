@@ -1,0 +1,11 @@
+List of watched railscasts (as part of this lesson plan)
+
+http://railscasts.com/episodes/106-time-zones-revised
+
+http://railscasts.com/episodes/115-model-caching-revised
+
+http://railscasts.com/episodes/270-authentication-in-rails-3-1
+
+http://railscasts.com/episodes/394-sti-and-polymorphic-associations
+
+http://railscasts.com/episodes/196-nested-model-form-revised
