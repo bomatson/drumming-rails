@@ -1,20 +1,37 @@
 WORDS = ["randy", "fay", "gary"]
 
+def evaluate(answer, word, status)
+  sleep 2
+  if answer == word
+    puts "Right!"
+  else
+    puts "Wrong!"
+    status = 'failure'
+    return status
+  end
+end
+
 def prompt
+  failures = []
   WORDS.each do |word|
     %x(say #{word})
-    sleep 2 
     answer = STDIN.gets.chomp()
-    if answer == word
-      puts "Right!"
-    else
-      puts "Wrong!"
+    status = nil
+
+    evaluate(answer, word, status)
+    puts status.inspect
+
+    if status == 'failure'
+      failures << word
     end
+    next
   end
+
+  puts failures.inspect
 end
 
 prompt
 
-# need to make a timer method that executes instead of sleep 
-# (unless I can escape or exit sleep)
+# early version of getting the timing right, also broke out the logic to another func
+# need to log success and failures, but I can't return the status string for some reason  
 

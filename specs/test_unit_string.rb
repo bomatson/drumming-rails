@@ -67,4 +67,12 @@ class StringTest < Test::Unit::TestCase
     assert_equal another_string.chomp!, nil
   end
 
+  def test_clear_method
+    string = "clear me!"
+
+    assert_not_equal string.clear, "clear me!"
+    assert_equal string, ""
+
+  end
+
 end

@@ -60,4 +60,10 @@ class TestString < Minitest::Test
     assert_equal @test.chomp, "This is my test and I can cry if I want to"
 
   end
+
+  def test_clear_method
+    assert_equal @soup.clear, ""
+    refute_equal @soup.clear, "soup"
+    assert_empty @soup
+  end
 end

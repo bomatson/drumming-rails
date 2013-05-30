@@ -68,4 +68,10 @@ describe 'String Test' do
     carriage.chomp.should eq("heyo")
 
   end
+
+  it 'will clear the string with the clear method' do
+    string.clear.should be_empty
+    string.should_not eq("This is my test")
+
+  end
 end
