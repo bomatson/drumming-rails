@@ -31,6 +31,10 @@ class StringTest < Test::Unit::TestCase
 
     assert_equal string, "my string with more string"
     assert_not_equal string, "my string"
+
+    string << " and even more string"
+    assert_equal string, "my string with more string and even more string"
+    assert_not_equal string, "my string with more string"
   end
 
   def test_replace_method

@@ -29,6 +29,12 @@ class TestString < Minitest::Test
     string.concat(" with more string")
 
     assert_equal string, "my string with more string"
+
+    string << " and more string"
+
+    assert_equal string, "my string with more string and more string"
+    refute_equal string, "my string with more string"
+
   end
 
   def test_replace_method

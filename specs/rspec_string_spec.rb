@@ -37,6 +37,12 @@ describe 'String Test' do
     string.concat(", my friend").should eq("This is my test, my friend")
 
     string.should_not eq("This is my test")
+
+    string << ", my ally"
+
+    string.should_not eq("This is my test, my friend")
+
+    string.concat(33).should eq("This is my test, my friend, my ally!")
     
   end
 
