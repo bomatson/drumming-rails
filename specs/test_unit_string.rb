@@ -79,4 +79,11 @@ class StringTest < Test::Unit::TestCase
 
   end
 
+  def test_delete_method
+    string = "delete the e"
+
+    assert_equal string.delete("e"), "dlt th "
+    assert_not_equal string.delete("e"), "delete the e"
+  end
+
 end

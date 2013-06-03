@@ -80,4 +80,10 @@ describe 'String Test' do
     string.should_not eq("This is my test")
 
   end
+
+  it 'will delete specified parts of the string with the delete method' do
+    second_string.delete("un").should eq("      stripped      ")
+    string.delete("This is").should eq("mytet")
+    #delete will remove all instances of the char, including spaces
+  end
 end

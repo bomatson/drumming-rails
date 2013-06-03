@@ -72,4 +72,9 @@ class TestString < Minitest::Test
     refute_equal @soup.clear, "soup"
     assert_empty @soup
   end
+
+  def test_delete_method 
+    assert_equal @soup.delete("so"), "up"
+    refute_equal @soup.delete("so"), "soup"
+  end
 end
