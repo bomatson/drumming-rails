@@ -2,6 +2,13 @@ require 'random-word'
 
 FAILURES = []
 
+def introduction
+  puts "Welcome to the wonderful typing game.\n Please enter your name to start the game!\n When you are done, please enter 'stop'"  
+  print ">"
+  user = STDIN.gets.chomp()
+  return user
+end
+
 def evaluate(answer, word)
   if answer == word
     puts "Right!"
@@ -11,9 +18,9 @@ def evaluate(answer, word)
   end
 end
 
-def prompt
-  RandomWord.adjs.each do |word|
-    puts word
+def start_game(user)
+  RandomWord.adjs.each_with_index do |word, idx|
+    puts "Mr. #{user}, this is word #{idx + 1}"
     %x(say #{word})
     answer = STDIN.gets.chomp()
     break if answer == "stop"
@@ -23,7 +30,7 @@ def prompt
 
 end
 
-prompt
+start_game(introduction)
 
 puts "You missed the following words:"
 
@@ -31,7 +38,5 @@ FAILURES.each do |f|
   puts f
 end
 
-# using a random word generator to get legit words, and made a case for breaking
-# out of the program once you've had enough
-# next need to figure out 'levels' as well as better timing around answering
-
+# made it seem more like a game, and included the index when iterating through words
+# need levels and timer
