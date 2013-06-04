@@ -86,4 +86,12 @@ class StringTest < Test::Unit::TestCase
     assert_not_equal string.delete("e"), "delete the e"
   end
 
+  def test_downcase_method
+    string = "UpperCaSe"
+    other = "lowercase"
+
+    assert_equal string.downcase, "uppercase"
+    assert_equal other.downcase!, nil
+  end
+
 end

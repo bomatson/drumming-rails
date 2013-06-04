@@ -86,4 +86,9 @@ describe 'String Test' do
     string.delete("This is").should eq("mytet")
     #delete will remove all instances of the char, including spaces
   end
+
+  it 'will downcase the method and return nil if nothing happens' do
+    string.downcase.should eq("this is my test")
+    lowercase_string.downcase!.should be_nil
+  end
 end
