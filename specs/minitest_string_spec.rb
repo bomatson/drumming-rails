@@ -6,7 +6,6 @@ class TestString < Minitest::Test
     @test = "This is my test and I can cry if I want to"
     @unstripped = "     unstripped     "
     @soup = "soup"
-    @capitalized = "THERE is Some CapitaliZation"
   end
 
   def test_string_length
@@ -80,8 +79,12 @@ class TestString < Minitest::Test
   end
 
   def test_downcase_method
-    assert_equal @capitalized.downcase, "there is some capitalization"
-    refute_equal @capitalized.downcase, "THERE is Some CapitaliZation"
+    assert_equal "CAPITALIZATION".downcase, "capitalization"
     assert_equal @soup.downcase!, nil
+  end
+
+  def test_insert_method
+    assert_equal @soup.insert(0, 'Campbell\'s '), "Campbell's soup"
+    refute_equal @soup, "soup"
   end
 end

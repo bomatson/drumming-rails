@@ -94,4 +94,8 @@ class StringTest < Test::Unit::TestCase
     assert_equal other.downcase!, nil
   end
 
+  def test_insert_method
+    assert_equal "Bobby".insert(-3, "bb"), "Bobbbby"
+  end
+
 end

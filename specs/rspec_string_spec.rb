@@ -91,4 +91,10 @@ describe 'String Test' do
     string.downcase.should eq("this is my test")
     lowercase_string.downcase!.should be_nil
   end
+
+  it 'will insert the string and persist the change' do
+    string.insert(-1, " and that's that").should eq("This is my test and that's that")
+    string.should_not eq("This is my test")
+  end
+
 end
