@@ -1,4 +1,5 @@
 require 'random-word'
+require 'timeout'
 
 FAILURES = []
 
@@ -10,21 +11,30 @@ def introduction
 end
 
 def evaluate(answer, word)
-  if answer == word
-    puts "Right!"
-  else
-    puts "Wrong!"
-    FAILURES << word
+
+  begin 
+    Timeout.timeout(5) do
+      if answer == word
+        puts "Right!"
+      else
+        puts "Wrong!"
+        FAILURES << word
+      end
+    end
+  rescue Timeout::Error => e
+    puts "You took too long!"
   end
+  
 end
 
 def start_game(user)
+
   RandomWord.adjs.each_with_index do |word, idx|
     puts "Mr. #{user}, this is word #{idx + 1}"
     %x(say #{word})
     answer = STDIN.gets.chomp()
     break if answer == "stop"
-    sleep 2 unless evaluate(answer, word)
+    evaluate(answer, word)
     next
   end
 
@@ -38,5 +48,4 @@ FAILURES.each do |f|
   puts f
 end
 
-# made it seem more like a game, and included the index when iterating through words
-# need levels and timer
+# timer doesn't seem to be working, do I need to use threading?
