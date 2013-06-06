@@ -87,4 +87,12 @@ class TestString < Minitest::Test
     assert_equal @soup.insert(0, 'Campbell\'s '), "Campbell's soup"
     refute_equal @soup, "soup"
   end
+
+  def test_lines_method
+    string = "this\n is a new \n thing"
+
+    assert_equal string.lines.to_a, ["this\n", " is a new \n", " thing"]
+
+    assert_kind_of Enumerable, string.lines
+  end
 end

@@ -97,4 +97,9 @@ describe 'String Test' do
     string.should_not eq("This is my test")
   end
 
+  it 'will return an enumerator with the lines method' do
+     carriage.lines.kind_of? Enumerable
+     carriage.lines.to_a.should eq(["heyo\n"])
+  end
+
 end

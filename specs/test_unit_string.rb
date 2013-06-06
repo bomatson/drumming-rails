@@ -87,15 +87,27 @@ class StringTest < Test::Unit::TestCase
   end
 
   def test_downcase_method
-    string = "UpperCaSe"
+    string = "Uppercase"
+    string2 = "upperCased"
     other = "lowercase"
 
+
     assert_equal string.downcase, "uppercase"
+    assert_equal string2.downcase, "uppercased"
     assert_equal other.downcase!, nil
   end
 
   def test_insert_method
     assert_equal "Bobby".insert(-3, "bb"), "Bobbbby"
+  end
+
+  def test_lines_method
+    #creates an enumerator, which you can called methods like to_a on
+    string = "this\n is a new \n thing"
+
+    assert_equal string.lines.to_a, ["this\n", " is a new \n", " thing"]
+    assert_kind_of Enumerable, string.lines
+
   end
 
 end
