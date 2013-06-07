@@ -3,111 +3,98 @@ require "test/unit"
 
 class StringTest < Test::Unit::TestCase
 
-  def test_string_length
-    string = "This is my test and I can cry if I want to"
-    assert_equal(42, string.length)
+  def test_test_length
+    assert_equal "This is my test and I can cry if I want to".length, 42
   end
 
   def test_strip_method
-    string = "     unstripped     "
-
-    assert_equal('unstripped', string.strip)
+    assert_equal "     unstripped     ".strip, "unstripped"
   end
 
-  def test_string_comparisons
-    string1 = "apples"
-    string2 = "apple"
-    string3 = "APPLES"
+  def test_string_comparisons_with_single_char_difference
+    assert_equal("apples" <=> "apple", 1)
+    assert_equal("apple" <=> "apples", -1) 
+  end  
 
-    assert_equal(string1 <=> string2, 1)
-    assert_equal(string2 <=> string1, -1)
-    assert_equal(string1 <=> string3.downcase, 0)
-    assert_equal(string1 <=> string2.length, nil)    
+  def comparing_string_and_integer_returns_nil
+    assert_equal("apples" <=> 5, nil)  
   end
 
   def test_concat_method
-    string = "my string"
-    string.concat(" with more string")
+    assert_equal "my test".concat(" with more test"), "my test with more test"
+  end
 
-    assert_equal string, "my string with more string"
-    assert_not_equal string, "my string"
-
-    string << " and even more string"
-    assert_equal string, "my string with more string and even more string"
-    assert_not_equal string, "my string with more string"
+  def test_arrow_concat_method
+    assert_equal "my test" << " and even more test", "my test and even more test"
   end
 
   def test_replace_method
-    string = "soup"
-    string.replace("beans")
-
-    assert_equal string, "beans"
-    assert_not_equal string, "soup"
+    assert_equal "soup".replace("beans"), "beans"
   end
 
-  def test_element_reference
-    string = " this STRING "
+  def test_element_reference_with_string
+    test = " this STRING "
+    assert_equal test["this"], "this" 
+  end
 
-    assert_equal string["this"], "this"
-    assert_not_equal string[0], "t"
-    assert_equal string[-4, 2], "IN"   
+  def test_element_reference_using_index
+    test = " this STRING "
+    assert_equal test[-4, 2], "IN"   
+  end
+
+  def test_element_reference_counts_spaces
+    test = " this STRING "
+    assert_not_equal test[0], "t"
   end
 
   def test_capitalize_method
-    string = "lowercase"
-
-    assert_equal string.capitalize, "Lowercase"
-    assert_equal string.capitalize!, "Lowercase"
-    assert_not_equal string, "lowercase"
-
+    assert_equal "lowercase".capitalize, "Lowercase"
   end
 
   def test_chomp_method
-    string = "heyo\n"
-    another_string = "test"
+    assert_equal "heyo\n".chomp, "heyo"
+    assert_not_equal "heyo\n".chomp, "heyo\n"
+  end
 
-    assert_equal string.chomp, "heyo"
-    assert_not_equal string.chomp, "heyo\n"
-    assert_equal another_string.chomp!, nil
+  def test_chomp_bang_method
+    assert_equal "test".chomp!, nil
   end
 
   def test_clear_method
-    string = "clear me!"
-
-    assert_not_equal string.clear, "clear me!"
-    assert_equal string, ""
-
+    test = "clear me!"
+    assert_not_equal test.clear, "clear me!"
+    assert_equal test, ""
   end
 
   def test_delete_method
-    string = "delete the e"
-
-    assert_equal string.delete("e"), "dlt th "
-    assert_not_equal string.delete("e"), "delete the e"
+    assert_equal "delete the e".delete("e"), "dlt th "
   end
 
-  def test_downcase_method
-    string = "Uppercase"
-    string2 = "upperCased"
-    other = "lowercase"
+  def test_downcase_method_with_all_capitals
+    assert_equal "UPPERCASE".downcase, "uppercase"
+  end
 
+  def test_downcase_method_with_random_capitals
+    assert_equal "kindaCasEd".downcase, "kindacased"
+  end
 
-    assert_equal string.downcase, "uppercase"
-    assert_equal string2.downcase, "uppercased"
-    assert_equal other.downcase!, nil
+  def test_downcase_bang
+    assert_equal "lowercase".downcase!, nil
   end
 
   def test_insert_method
     assert_equal "Bobby".insert(-3, "bb"), "Bobbbby"
   end
 
-  def test_lines_method
-    #creates an enumerator, which you can called methods like to_a on
-    string = "this\n is a new \n thing"
+  def test_lines_method_usage
+    assert_equal "this\n is a new \n thing".lines, ["this\n", " is a new \n", " thing"]
+  end
 
-    assert_equal string.lines.to_a, ["this\n", " is a new \n", " thing"]
-    assert_kind_of Enumerable, string.lines
-
+  def test_lines_method_class
+    test = "this\n is a new \n thing"
+    assert_kind_of Enumerable, test.lines
+    assert_kind_of Array, test.lines
+    # these both pass, how???? Can something be an enumerable and an array?
   end
 
 end
