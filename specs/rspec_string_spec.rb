@@ -9,97 +9,105 @@ describe 'String Test' do
   let(:carriage) {"heyo\n"}
 
   it 'should match on string length' do
-    
     string.length.should eq(15)
-  
   end
 
   it 'should respond to the strip method' do
-    
     second_string.strip.should eq("unstripped")
-
-    "unstripped".should_not eq(second_string)
-    
   end
 
-  it 'should use string comparisons properly' do
-    
+  it 'should use string comparisons with single char difference' do
+    ("unstrip" <=> "unstripped").should eq(-1)
+    ("unstripped" <=> "unstripp").should eq(1)
+  end
+
+  it 'should use string comparisons with no char difference' do
     (string <=> "This is my test").should eq(0)
-    (second_string <=> "unstrippeded").should eq(-1)
-    (second_string.strip <=> "unstripp").should eq(1)
+  end
 
-    (second_string <=> string.length).should be_nil
-
+  it 'will return nil if comparing strings to integers' do
+    (second_string <=> 5).should be_nil
   end
 
   it 'should append the string with concat method' do
-    
     string.concat(", my friend").should eq("This is my test, my friend")
+  end
 
-    string.should_not eq("This is my test")
+  it 'will append the string with arrow concat method' do
+    (string << ", my ally").should eq("This is my test, my ally")
+  end
 
-    string << ", my ally"
-
-    string.should_not eq("This is my test, my friend")
-
-    string.concat(33).should eq("This is my test, my friend, my ally!")
-    
+  it 'will append a char based on characters id' do
+    string.concat(33).should eq("This is my test!")
   end
 
   it 'should replace the origin string with a new string' do
-
     string.replace("beans").should eq("beans")
-    string.should_not eq("This is my test")
-    string.should eq("beans")
   end
 
-  it 'should recognize an element reference' do
-    string[0].should eq("T")
-    string[0].should_not eq("t")   
+  it 'should recognize an element reference with an index' do
+    string[0].should eq("T") 
+  end
+
+  it 'should find an element reference with a range' do
     string[0..4].should eq("This ") 
+  end
+
+  it 'should find an element reference with a string' do
+    string['test'].should eq("test") 
   end
 
   it 'should properly use the capitalize method' do
     string.capitalize.should eq(string)
-
-    lowercase_string.capitalize!.should eq("Lowercase")
-    lowercase_string.capitalize!.should be_nil
-    #with the bang version of capitalize, the capitalize method returns 
-    #nil if the operation has already been performed
   end
 
-  it 'should chomp off a carriage return and use chomp! properly' do
-    string.chomp.should eq(string)
-    string.chomp!.should eq(nil)
-    carriage.chomp.should eq("heyo")
+  it 'should return nil on bang if element is capitalized' do
+    string.capitalize!.should be_nil
+  end
 
+  it 'should return capitalized string with bang' do
+    lowercase_string.capitalize!.should eq("Lowercase")
+  end
+
+  it 'should return string if no change is made with chomp' do
+    string.chomp.should eq(string)
+  end
+
+  it 'should use chomp properly' do
+    carriage.chomp.should eq("heyo")
+  end
+
+  it 'should return nil if no change is made with bang chomp' do
+    string.chomp!.should be_nil
   end
 
   it 'will clear the string with the clear method' do
     string.clear.should be_empty
-    string.should_not eq("This is my test")
-
   end
 
   it 'will delete specified parts of the string with the delete method' do
-    second_string.delete("un").should eq("      stripped      ")
-    string.delete("This is").should eq("mytet")
+    second_string.delete("un ").should eq("stripped")
     #delete will remove all instances of the char, including spaces
   end
 
-  it 'will downcase the method and return nil if nothing happens' do
+  it 'will downcase the string' do
     string.downcase.should eq("this is my test")
+  end
+
+  it 'will return nil if nothing happens for bang downcase' do
     lowercase_string.downcase!.should be_nil
   end
 
-  it 'will insert the string and persist the change' do
+  it 'will insert the string using the position argument' do
     string.insert(-1, " and that's that").should eq("This is my test and that's that")
-    string.should_not eq("This is my test")
   end
 
-  it 'will return an enumerator with the lines method' do
+  it 'will return an enumerator & array with the lines method' do
      carriage.lines.kind_of? Enumerable
-     carriage.lines.to_a.should eq(["heyo\n"])
+     carriage.lines.kind_of? Array
   end
 
+  it 'will properly use the lines method' do
+     carriage.lines.should eq(["heyo\n"])
+  end
 end

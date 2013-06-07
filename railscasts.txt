@@ -11,3 +11,5 @@ http://railscasts.com/episodes/394-sti-and-polymorphic-associations
 http://railscasts.com/episodes/196-nested-model-form-revised
 
 http://railscasts.com/episodes/311-form-builders
+
+http://railscasts.com/episodes/274-remember-me-reset-password
