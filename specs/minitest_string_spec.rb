@@ -2,97 +2,92 @@ require "rubygems"
 require "minitest/autorun"
 
 class TestString < Minitest::Test
-  def setup
-    @test = "This is my test and I can cry if I want to"
-    @unstripped = "     unstripped     "
-    @soup = "soup"
-  end
 
   def test_string_length
-    assert_equal 42, @test.length
+    assert_equal "This is my test and I can cry if I want to".length, 42
   end
 
   def test_strip_method
-    assert_equal "unstripped", @unstripped.strip
+    assert_equal "     unstripped     ".strip, "unstripped"
   end
 
-  def test_string_comparison
-    assert_equal "unstripped" <=> @unstripped.strip, 0
-    assert_equal "unstrippede" <=> @unstripped.strip, 1
-    assert_equal "unstrip" <=> @unstripped.strip, -1
-    assert_equal @test.length <=> @unstripped.strip, nil
+  def test_string_comparisons_with_single_char_difference
+    assert_equal "unstrippede" <=> "unstripped", 1
+    assert_equal "unstrip" <=> "unstripped", -1
+  end
 
+  def test_string_comparison_with_spaces
+    assert_equal "spaces" <=> "     spaces     ", 1
+    #returns 1 instead of -1 because space is counted as earlier in the ABCs
+  end
+
+  def string_comparisons_return_nil_against_integer
+    assert_equal 4 <=> "some string", nil
   end
 
   def test_concat_method
-    string = "my string"
-    string.concat(" with more string")
+    assert_equal "my string".concat(" with more string"), "my string with more string"
+  end
 
-    assert_equal string, "my string with more string"
-
-    string << " and more string"
-
-    assert_equal string, "my string with more string and more string"
-    refute_equal string, "my string with more string"
-
+  def test_arrow_concat_method
+    assert_equal "string" << " and more string", "string and more string"
   end
 
   def test_replace_method
-    assert_equal @soup, "soup" 
-    refute_equal @soup.replace("beans"), "soup"
-    assert_equal @soup.replace("beans"), "beans"
-
+    assert_equal "soup".replace("beans"), "beans"
   end
 
-  def test_element_reference
-    assert_equal @soup[1], "o"
-    assert_equal @soup[0..2], "sou"
-    refute_equal @soup[0], "u"
+  def test_element_reference_with_index
+    soup = "soup"
+    assert_equal soup[1], "o"
+    assert_equal soup[0..2], "sou"
   end
 
   def test_capitalize_method
-    assert_equal @soup.capitalize , "Soup"
-    refute_equal @soup.capitalize, @soup
+    assert_equal "soup".capitalize , "Soup"
+  end
 
-    assert_equal @unstripped.capitalize, @unstripped
-    #since the first char is a space, there is no char to capitalize
+  def test_capitalize_against_spaces
+    assert_equal " space".capitalize, " space"
   end
 
   def test_chomp_method
-    refute_equal "heyo\n".chomp, "heyo\n"
     assert_equal "heyo\n".chomp, "heyo"
-    assert_equal @soup.chomp("p"), "sou"
-    assert_equal @test.chomp!, nil
-    assert_equal @test.chomp, "This is my test and I can cry if I want to"
+  end
 
+  def test_chomp_method_with_argument
+    assert_equal "soup".chomp("p"), "sou"
+  end
+
+  def test_chomp_bang_method
+    assert_equal "test".chomp!, nil
   end
 
   def test_clear_method
-    assert_equal @soup.clear, ""
-    refute_equal @soup.clear, "soup"
-    assert_empty @soup
+    assert_empty "clear me".clear
   end
 
   def test_delete_method 
-    assert_equal @soup.delete("so"), "up"
-    refute_equal @soup.delete("so"), "soup"
+    assert_equal "soup".delete("so"), "up"
   end
 
   def test_downcase_method
     assert_equal "CAPITALIZATION".downcase, "capitalization"
-    assert_equal @soup.downcase!, nil
+  end
+
+  def test_downcase_with_bang
+    assert_equal "soup".downcase!, nil
   end
 
   def test_insert_method
-    assert_equal @soup.insert(0, 'Campbell\'s '), "Campbell's soup"
-    refute_equal @soup, "soup"
+    assert_equal "soup".insert(0, 'Campbell\'s '), "Campbell's soup"
   end
 
-  def test_lines_method
-    string = "this\n is a new \n thing"
+  def test_lines_method_class
+    assert_kind_of Array, "this\n is a new \n thing".lines
+  end
 
-    assert_equal string.lines.to_a, ["this\n", " is a new \n", " thing"]
-
-    assert_kind_of Enumerable, string.lines
+  def test_lines_method_usage
+    assert_equal "this\n is a new \n thing".lines, ["this\n", " is a new \n", " thing"]
   end
 end
