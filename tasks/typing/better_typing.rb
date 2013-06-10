@@ -10,12 +10,15 @@ def introduction
   return user
 end
 
-def evaluate(answer, word)
+def evaluate(word)
 
   begin 
-    Timeout.timeout(5) do
+    Timeout::timeout(5) do
+      answer = STDIN.gets.chomp()
       if answer == word
         puts "Right!"
+      elsif answer == "stop"
+        break
       else
         puts "Wrong!"
         FAILURES << word
@@ -24,7 +27,6 @@ def evaluate(answer, word)
   rescue Timeout::Error => e
     puts "You took too long!"
   end
-  
 end
 
 def start_game(user)
@@ -32,9 +34,7 @@ def start_game(user)
   RandomWord.adjs.each_with_index do |word, idx|
     puts "Mr. #{user}, this is word #{idx + 1}"
     %x(say #{word})
-    answer = STDIN.gets.chomp()
-    break if answer == "stop"
-    evaluate(answer, word)
+    evaluate(word)
     next
   end
 
@@ -48,4 +48,4 @@ FAILURES.each do |f|
   puts f
 end
 
-# timer doesn't seem to be working, do I need to use threading?
+# timeout works correctly, but need to make the break work out of a begin block for stopping
