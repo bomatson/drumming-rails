@@ -97,4 +97,15 @@ class StringTest < Test::Unit::TestCase
     # these both pass, how???? Can something be an enumerable and an array?
   end
 
+  def test_gsub_pattern_replacement
+    assert_equal "string".gsub(/[aeiou]/, '[VOWEL]'), "str[VOWEL]ng"
+  end
+
+  def test_gsub_hash_replacement
+    assert_equal "string".gsub(/[i]/, 'i' => '*'), "str*ng"
+  end
+
+  def test_gsub_hash_replacement_with_integer
+    assert_equal "string".gsub(/[i]/, 'i' => 1), "str1ng"
+  end
 end

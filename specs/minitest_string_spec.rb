@@ -90,4 +90,16 @@ class TestString < Minitest::Test
   def test_lines_method_usage
     assert_equal "this\n is a new \n thing".lines, ["this\n", " is a new \n", " thing"]
   end
+
+  def test_gsub_pattern_replacement
+    assert_equal "string".gsub(/[aeiou]/, '[VOWEL]'), "str[VOWEL]ng"
+  end
+
+  def test_gsub_hash_replacement
+    assert_equal "string".gsub(/[i]/, 'i' => '*'), "str*ng"
+  end
+
+  def test_gsub_hash_replacement_with_integer
+    assert_equal "string".gsub(/[i]/, 'i' => 1), "str1ng"
+  end
 end

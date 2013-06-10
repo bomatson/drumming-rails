@@ -103,11 +103,23 @@ describe 'String Test' do
   end
 
   it 'will return an enumerator & array with the lines method' do
-     carriage.lines.kind_of? Enumerable
-     carriage.lines.kind_of? Array
+    carriage.lines.kind_of? Enumerable
+    carriage.lines.kind_of? Array
   end
 
   it 'will properly use the lines method' do
-     carriage.lines.should eq(["heyo\n"])
+    carriage.lines.should eq(["heyo\n"])
+  end
+
+  it 'will gsub using basic pattern replacement' do
+    string.gsub(/[aeiou]/, '[VOWEL]').should eq("Th[VOWEL]s [VOWEL]s my t[VOWEL]st")
+  end
+
+  it 'will gsub using hash pattern replacement' do
+    string.gsub(/[ie]/, 'i' => '*').should eq("Th*s *s my tst")
+  end
+
+  it 'will gsub using hash pattern replacement with an integer' do
+    string.gsub(/[ie]/, 'i' => '1', 'e' => 5).should eq("Th1s 1s my t5st")
   end
 end
