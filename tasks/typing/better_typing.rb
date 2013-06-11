@@ -26,7 +26,7 @@ def evaluate(word)
     end
   rescue Timeout::Error => e
     puts "You took too long!"
-  end
+  end 
 end
 
 def start_game(user)

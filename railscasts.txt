@@ -13,3 +13,5 @@ http://railscasts.com/episodes/196-nested-model-form-revised
 http://railscasts.com/episodes/311-form-builders
 
 http://railscasts.com/episodes/274-remember-me-reset-password
+
+http://railscasts.com/episodes/72-adding-an-environment-revised
