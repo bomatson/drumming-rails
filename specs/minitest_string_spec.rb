@@ -102,4 +102,12 @@ class TestString < Minitest::Test
   def test_gsub_hash_replacement_with_integer
     assert_equal "string".gsub(/[i]/, 'i' => 1), "str1ng"
   end
+
+  def test_string_partition
+    assert_equal "string".partition("t"), ["s", "t", "ring"]
+  end
+
+  def test_string_partition_with_regex
+    assert_equal "hello".partition(/.l./), ["h", "ell", "o"]
+  end
 end

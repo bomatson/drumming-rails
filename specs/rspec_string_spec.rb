@@ -122,4 +122,12 @@ describe 'String Test' do
   it 'will gsub using hash pattern replacement with an integer' do
     string.gsub(/[ie]/, 'i' => '1', 'e' => 5).should eq("Th1s 1s my t5st")
   end
+
+  it 'will partition the string' do
+    string.partition("my").should eq(["This is ", "my", " test"])
+  end
+  
+  it 'will partition the string with regex' do
+    string.partition(/my/).should eq(["This is ", "my", " test"])
+  end
 end
