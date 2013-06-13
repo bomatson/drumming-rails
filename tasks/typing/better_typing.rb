@@ -1,6 +1,20 @@
 require 'random-word'
 require 'timeout'
 
+class Level
+  attr_accessor :success_count
+
+  def initialize(success_count = 0)
+
+    @success = success_count
+  end
+end
+
+# EASY = RandomWord.adjs.to_a.take(10)
+# MEDIUM = RandomWord.adjs.to_a.take(30)
+# HARD = RandomWord.adjs.to_a.take(100)
+SUCCESSES = []
+
 FAILURES = []
 
 def introduction
@@ -16,6 +30,7 @@ def evaluate(word)
       answer = STDIN.gets.chomp()
       if answer == word
         puts "Right!"
+        SUCCESSES << word
       elsif answer == "stop"
         break
       else
@@ -23,7 +38,7 @@ def evaluate(word)
         FAILURES << word
       end
     end
-  rescue Timeout::Error => e
+  rescue Timeout::Error
     puts "You took too long!"
   end 
 end
@@ -47,4 +62,11 @@ FAILURES.each do |f|
   puts f
 end
 
-#I need to use catch and throw to escape?
+puts "You got the following words:"
+
+SUCCESSES.each do |f|
+  puts f
+end
+
+#I need to use catch and throw to escape in order to stop the game?
+#create levels and start using them once the success count gets high enough, use level class
