@@ -130,4 +130,12 @@ describe 'String Test' do
   it 'will partition the string with regex' do
     string.partition(/my/).should eq(["This is ", "my", " test"])
   end
+
+  it 'will prepend the string with another string' do
+    "face".prepend("Gary ").should eq("Gary face")
+  end
+
+  it 'will reverse the string' do
+    "string".reverse.should eq("gnirts")
+  end
 end

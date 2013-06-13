@@ -110,4 +110,12 @@ class TestString < Minitest::Test
   def test_string_partition_with_regex
     assert_equal "hello".partition(/.l./), ["h", "ell", "o"]
   end
+
+  def prepend_string_on_another_string
+    assert_equal "face".prepend("Gary "), "Gary face"
+  end
+
+  def test_string_reversal
+    assert_equal "string".reverse, "gnirts"
+  end
 end

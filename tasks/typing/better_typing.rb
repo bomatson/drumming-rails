@@ -11,7 +11,6 @@ def introduction
 end
 
 def evaluate(word)
-
   begin 
     Timeout::timeout(5) do
       answer = STDIN.gets.chomp()
@@ -48,4 +47,4 @@ FAILURES.each do |f|
   puts f
 end
 
-# timeout works correctly, but need to make the break work out of a begin block for stopping
+#I need to use catch and throw to escape?
