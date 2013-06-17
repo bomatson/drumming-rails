@@ -19,10 +19,22 @@ FAILURES = []
 
 def introduction
   puts "Welcome to the wonderful typing game.\n Please enter your name to start the game!\n When you are done, please enter 'stop'"  
-  print ">"
+  print "> "
   user = STDIN.gets.chomp()
   return user
 end
+
+# client
+# server
+
+# Sinatra server
+#   speak the word
+#   tracks the time
+#   send it typed version, server says pass or fail
+# Faraday REST client (https://github.com/lostisland/faraday)
+#   sends typed shit to server
+# client.rb and server.rb
+# test-driven!
 
 def evaluate(word)
   begin 
@@ -46,7 +58,7 @@ end
 def start_game(user)
 
   RandomWord.adjs.each_with_index do |word, idx|
-    puts "Mr. #{user}, this is word #{idx + 1}"
+    puts "#{user}, this is word #{idx + 1}"
     %x(say #{word})
     evaluate(word)
     next
