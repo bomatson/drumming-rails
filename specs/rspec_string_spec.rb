@@ -138,4 +138,12 @@ describe 'String Test' do
   it 'will reverse the string' do
     "string".reverse.should eq("gnirts")
   end
+
+  it 'will scan the string by words' do
+    "string here".scan(/\w+/).should eq(["string", "here"])
+  end
+
+  it 'will scan the string in triple char regex' do
+    "string here".scan(/.../).should eq(["str","ing"," he"])
+  end
 end

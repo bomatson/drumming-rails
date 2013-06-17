@@ -124,4 +124,12 @@ class StringTest < Test::Unit::TestCase
   def test_string_reversal
     assert_equal "string".reverse, "gnirts"
   end
+
+  def test_scan_word_regex
+    assert_equal "string here".scan(/\w+/), ["string", "here"]
+  end
+
+  def test_scan_group_three_char_regex
+    assert_equal "string here".scan(/.../), ["str", "ing", " he"]
+  end
 end
