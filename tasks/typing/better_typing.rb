@@ -34,7 +34,7 @@ end
 # Faraday REST client (https://github.com/lostisland/faraday)
 #   sends typed shit to server
 # client.rb and server.rb
-# test-driven!
+# test-driven! sinatra tdd
 
 def evaluate(word)
   begin 

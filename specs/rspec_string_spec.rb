@@ -146,4 +146,20 @@ describe 'String Test' do
   it 'will scan the string in triple char regex' do
     "string here".scan(/.../).should eq(["str","ing"," he"])
   end
+
+  it 'will split the string by spaces default' do
+    " string here".split.should eq(["string", "here"])
+  end
+
+  it 'will split the string by each char' do
+    "string here".split(//).should eq(["s", "t", "r", "i", "n", "g", " ", "h", "e", "r", "e"])
+  end
+
+  it 'will split the string with a char pattern' do
+    "string:here".split(':').should  eq(["string", "here"])
+  end
+
+  it 'will split the string with a regex pattern' do
+    "string here".split(/w/).should eq(["string here"])
+  end
 end

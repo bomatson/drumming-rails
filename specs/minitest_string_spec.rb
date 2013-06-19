@@ -127,5 +127,19 @@ class TestString < Minitest::Test
     assert_equal "string here".scan(/.../), ["str", "ing", " he"]
   end
 
+  def test_split_method_with_spaces_default
+    assert_equal " string here".split, ["string", "here"]
+  end
 
+  def test_split_method_with_each_char
+    assert_equal "string here".split(//), ["s", "t", "r", "i", "n", "g", " ", "h", "e", "r", "e"]
+  end
+
+  def test_split_method_with_char_pattern
+    assert_equal "string:here".split(':'), ["string", "here"]
+  end
+
+  def test_split_method_with_regex_pattern
+    assert_equal "string here".split(/w/), ["string here"]
+  end
 end
