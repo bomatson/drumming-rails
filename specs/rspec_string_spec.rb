@@ -162,4 +162,16 @@ describe 'String Test' do
   it 'will split the string with a regex pattern' do
     "string here".split(/w/).should eq(["string here"])
   end
+
+  it 'will remove dupes next to each other with squeeze' do
+    "strinng   herre".squeeze.should eq("string here")
+  end
+
+  it 'will removes dupes when specifying the character' do
+    "strinng   herre".squeeze(" ").should eq("strinng herre")
+  end
+
+  it 'will removes dupes when specifying the range' do
+    "strinng herree".squeeze("m-z").should eq("string heree")
+  end
 end

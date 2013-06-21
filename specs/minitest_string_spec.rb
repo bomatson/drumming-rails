@@ -142,4 +142,16 @@ class TestString < Minitest::Test
   def test_split_method_with_regex_pattern
     assert_equal "string here".split(/w/), ["string here"]
   end
+
+  def test_squeeze_to_remove_dupes
+    assert_equal "strinng    herre".squeeze, "string here"
+  end
+
+  def test_squeeze_to_remove_dupes_with_specific_char
+    assert_equal "strinng    herre".squeeze(" "), "strinng herre"
+  end
+
+  def test_squeeze_to_remove_dupes_with_range
+    assert_equal "strinng herree".squeeze("m-z"), "string heree"
+  end
 end
