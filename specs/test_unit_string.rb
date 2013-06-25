@@ -160,4 +160,16 @@ class StringTest < Test::Unit::TestCase
   def test_squeeze_to_remove_dupes_with_range
     assert_equal "strinng herree".squeeze("m-z"), "string heree"
   end
+
+  def test_start_with_single_parameter
+    assert_equal "stringy".start_with?("string"), true
+  end
+
+  def test_start_with_multiple_parameters
+    assert_equal "stringy".start_with?("other", "string"), true
+  end
+
+  def test_start_with_false_multiple_parameters
+    refute_equal "stringy".start_with?("other", "random"), true
+  end
 end

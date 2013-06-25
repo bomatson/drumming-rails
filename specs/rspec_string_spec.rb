@@ -174,4 +174,16 @@ describe 'String Test' do
   it 'will removes dupes when specifying the range' do
     "strinng herree".squeeze("m-z").should eq("string heree")
   end
+
+  it 'will evaluate start_with using single parameter' do
+    "stringy".start_with?("string").should be_true
+  end
+
+  it 'will evaluate start_with using multiple parameters' do
+    "stringy".start_with?("string", "other").should be_true
+  end
+
+  it 'will evaluate start_with using false multiple parameters' do
+    "stringy".start_with?("random", "other").should be_false
+  end
 end
