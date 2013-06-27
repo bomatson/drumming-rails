@@ -172,4 +172,16 @@ class StringTest < Test::Unit::TestCase
   def test_start_with_false_multiple_parameters
     refute_equal "stringy".start_with?("other", "random"), true
   end
+
+  def test_swapcase_to_uppercase
+    assert_equal "string".swapcase, "STRING"
+  end
+
+  def test_swapcase_to_lowercase
+    assert_equal "STRING".swapcase, "string"
+  end
+
+  def test_swapcase_mix_cases
+    assert_equal "sTrInG".swapcase, "StRiNg"
+  end
 end

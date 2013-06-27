@@ -186,4 +186,16 @@ describe 'String Test' do
   it 'will evaluate start_with using false multiple parameters' do
     "stringy".start_with?("random", "other").should be_false
   end
+
+  it 'will swapcase with all lowercase' do
+    "string".swapcase.should eq("STRING")
+  end
+
+  it 'will swapcase with all uppercase' do
+    "STRING".swapcase.should eq("string")
+  end
+
+  it 'will swapcase with a mix of cases' do
+    "StRiNg".swapcase.should eq("sTrInG")
+  end
 end
