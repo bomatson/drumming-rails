@@ -184,4 +184,16 @@ class StringTest < Test::Unit::TestCase
   def test_swapcase_mix_cases
     assert_equal "sTrInG".swapcase, "StRiNg"
   end
+
+  def test_to_i_from_number_string
+    assert_equal "124".to_i, 124
+  end
+
+  def test_to_i_from_mixed_string
+    assert_equal "99 bottles of beer".to_i, 99
+  end
+
+  def test_to_i_from_word_string
+    assert_equal "words".to_i, 0
+  end
 end

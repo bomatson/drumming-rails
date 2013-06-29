@@ -198,4 +198,16 @@ describe 'String Test' do
   it 'will swapcase with a mix of cases' do
     "StRiNg".swapcase.should eq("sTrInG")
   end
+
+  it 'will use to_i with a number string' do
+    "1234".to_i.should eq(1234)
+  end
+
+  it 'will use to_i with a mixed string' do
+    "99 bottles of beer".to_i.should eq(99)
+  end
+
+  it 'will use to_i with a word string' do
+    "words".to_i.should be_zero
+  end
 end
