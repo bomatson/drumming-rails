@@ -190,4 +190,16 @@ class TestString < Minitest::Test
   def test_to_i_from_word_string
     assert_equal "words".to_i, 0
   end
+
+  def test_to_sym_reg_string
+    assert_equal "string".to_sym, :string 
+  end
+
+  def test_intern_returns_symbol
+    assert_equal "string".intern, :string 
+  end
+
+  def test_special_char_to_sym
+    assert_equal "@variable".to_sym, :@variable
+  end
 end

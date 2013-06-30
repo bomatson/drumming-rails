@@ -210,4 +210,16 @@ describe 'String Test' do
   it 'will use to_i with a word string' do
     "words".to_i.should be_zero
   end
+
+  it 'will use to_sym to change klass' do
+    "words".to_sym.should be_a(Symbol)
+  end
+
+  it 'will use intern to change klass' do
+    "words".intern.should be_a(Symbol)
+  end
+
+  it 'will use to_sym to evaulate special chars' do
+    "@words".to_sym.should eq(:@words)
+  end
 end
