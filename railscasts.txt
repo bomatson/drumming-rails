@@ -21,3 +21,5 @@ http://railscasts.com/episodes/417-foundation
 http://railscasts.com/episodes/323-backbone-on-rails-part-1
 
 http://railscasts.com/episodes/202-active-record-queries-in-rails-3
+
+http://railscasts.com/episodes/162-tree-based-navigation-revised

@@ -208,4 +208,16 @@ class StringTest < Test::Unit::TestCase
   def test_special_char_to_sym
     assert_equal "@variable".to_sym, :@variable
   end
+
+  def test_tr_method_simple_trade
+    assert_equal "think".tr('th', 'st'), "stink"
+  end
+
+  def test_tr_method_range
+    assert_equal "think".tr('a-t', 'b'), 'bbbbb'
+  end
+
+  def test_tr_method_vowels
+    assert_equal "think".tr('aeiou', '*'), 'th*nk'
+  end
 end

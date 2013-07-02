@@ -222,4 +222,16 @@ describe 'String Test' do
   it 'will use to_sym to evaulate special chars' do
     "@words".to_sym.should eq(:@words)
   end
+
+  it 'will use tr to swap simple characters' do
+    "think".tr('th', 'st').should eq('stink')
+  end
+
+  it 'will use tr to swap ranges' do
+    "think".tr('a-t', 'b').should eq('bbbbb')
+  end
+
+  it 'will use tr to swap vowels' do
+    "think".tr('aeiou', '*').should eq('th*nk')
+  end
 end
