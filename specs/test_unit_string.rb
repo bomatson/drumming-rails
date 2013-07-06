@@ -220,4 +220,16 @@ class StringTest < Test::Unit::TestCase
   def test_tr_method_vowels
     assert_equal "think".tr('aeiou', '*'), 'th*nk'
   end
+  
+  def test_upto_successive_values
+    assert_equal "a".upto("c").to_a, ["a", "b", "c"]
+  end
+
+  def test_upto_successive_integers
+    assert_equal "1".upto("3").to_a, ["1", "2", "3"]
+  end
+
+  def test_upto_is_enumerator
+    assert_kind_of Enumerator, "a".upto("c")
+  end
 end

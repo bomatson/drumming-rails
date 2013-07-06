@@ -234,4 +234,16 @@ describe 'String Test' do
   it 'will use tr to swap vowels' do
     "think".tr('aeiou', '*').should eq('th*nk')
   end
+
+  it 'will use upto to iterate through successive values of two strings in an array' do
+    "a".upto("c").to_a.should eq(["a", "b", "c"]) 
+  end
+
+  it 'will use upto to create an enumerator' do
+    "1".upto("3").should be_a(Enumerator)  
+  end
+
+  it 'will use up to to iterate through successive string values, including integers' do
+    "1".upto("3").to_a.should eq(["1", "2", "3"])   
+  end
 end
