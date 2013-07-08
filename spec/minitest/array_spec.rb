@@ -18,4 +18,12 @@ class TestArray < Minitest::Test
   def test_object_notation_with_size_parameters
     assert_equal Array.new(2), [nil,nil]
   end
+
+  def test_passing_block_to_array
+    assert_equal Array.new(2) {Hash.new}, [{},{}]
+  end
+
+  def test_array_creation_directly
+    assert_equal Array({key: 'value'}), [[:key, "value"]]
+  end
 end

@@ -18,4 +18,13 @@ describe 'Array Test' do
   it 'should allow new with size parameters' do
     Array.new(2).should eq([nil, nil])
   end
+
+  it 'will pass block to an array' do
+    Array.new(2) {Hash.new}.should eq([{},{}])
+  end
+
+  it 'will create an array directly using Kernel' do
+    Array({key: 'value'}).should eq([[:key, "value"]])
+  end
+
 end
