@@ -3,6 +3,8 @@ require "rspec"
 
 describe 'Array Test' do
 
+  let(:arr){ [1,2,3,4]}
+
   it 'should allow literal construction of an array' do
     [1,2,3].should be_kind_of(Array)
   end
@@ -25,6 +27,18 @@ describe 'Array Test' do
 
   it 'will create an array directly using Kernel' do
     Array({key: 'value'}).should eq([[:key, "value"]])
+  end
+
+  it 'will access an element in the array with single arg' do 
+    arr[2].should eq(3)
+  end
+
+  it 'will access an element in the array with start and length args' do 
+    arr[0,4].should eq([1,2,3,4])
+  end
+
+  it 'will access an element in the array with a range' do 
+    arr[0..4].should eq([1,2,3,4])
   end
 
 end

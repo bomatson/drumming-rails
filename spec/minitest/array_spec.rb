@@ -26,4 +26,19 @@ class TestArray < Minitest::Test
   def test_array_creation_directly
     assert_equal Array({key: 'value'}), [[:key, "value"]]
   end
+
+  def test_access_element_with_single_arg
+    arr = [1,2,3,4] 
+    assert_equal arr[2], 3
+  end
+
+  def test_access_element_with_start_and_length
+    arr = [1,2,3,4] 
+    assert_equal arr[0,3], [1,2,3] 
+  end
+
+  def test_access_element_with_a_range
+    arr = [1,2,3,4] 
+    assert_equal arr[0..3], [1,2,3,4] 
+  end
 end
