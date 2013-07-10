@@ -41,4 +41,11 @@ describe 'Array Test' do
     arr[0..4].should eq([1,2,3,4])
   end
 
+  it 'will access the first element of the array' do
+    arr.first.should be(1)
+  end
+
+  it 'will access the last element of the array' do
+    arr.last.should be(4)
+  end
 end
