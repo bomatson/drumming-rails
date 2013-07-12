@@ -48,4 +48,12 @@ describe 'Array Test' do
   it 'will access the last element of the array' do
     arr.last.should be(4)
   end
+
+  it 'will use take to grab the first n elements' do
+    arr.take(2).should eq([1,2])
+  end
+
+  it 'will use drop to grab the last n elements' do
+    expect(arr.drop(2)).to eq([3,4])
+  end
 end

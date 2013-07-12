@@ -49,4 +49,12 @@ class TestArray < Minitest::Test
   def test_last_method_on_array
     assert_equal [1,2,3,4].last, 4
   end
+
+  def test_take_method_on_array
+    assert_equal [1,2,3,4].take(2), [1,2]
+  end
+
+  def test_drop_method_on_array
+    assert_equal [1,2,3,4].drop(2), [3,4]
+  end
 end
