@@ -56,4 +56,12 @@ describe 'Array Test' do
   it 'will use drop to grab the last n elements' do
     expect(arr.drop(2)).to eq([3,4])
   end
+
+  it 'will use include to check if an element is in the array' do
+    arr.include?(1).should be_true
+  end
+
+  it 'will use empty to check if an array is empty' do
+    arr.empty?.should be_false
+  end
 end

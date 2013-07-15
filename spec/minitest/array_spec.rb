@@ -57,4 +57,12 @@ class TestArray < Minitest::Test
   def test_drop_method_on_array
     assert_equal [1,2,3,4].drop(2), [3,4]
   end
+
+  def test_include_element_in_array
+    assert_equal [1,2,3,4].include?(1), true   
+  end
+
+  def test_empty_method_on_array
+    assert_equal [1,2,3,4].empty?, false   
+  end
 end
