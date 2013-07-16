@@ -9,7 +9,7 @@ class TypeMaster < Sinatra::Base
 
   get '/easy.json' do
   	content_type :json
-  	arr = RandomWord.adjs.to_a.take(100)
+  	arr = RandomWord.adjs.to_a.take(5)
 
   	hash = Hash[arr.each_with_index.map{|value, idx| [idx, value]}]
   	# hash = Hash[arr.map{|value| words: {value}}]
