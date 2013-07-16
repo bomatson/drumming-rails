@@ -64,4 +64,28 @@ describe 'Array Test' do
   it 'will use empty to check if an array is empty' do
     arr.empty?.should be_false
   end
+
+  it 'will use the push method to insert an integer into an array' do
+    arr.push(5).should eq([1,2,3,4,5])
+  end
+
+  it 'will use the push method to insert a string into an array' do
+    arr.push("bobby").should eq([1,2,3,4,"bobby"])
+  end
+
+  it 'will use the push method to insert a symbol into an array' do
+    arr.push(:bob).should eq([1,2,3,4,:bob])
+  end
+
+  it 'will use the push method to insert an array into an array' do
+    arr.push(["feather", "string"]).should eq([1,2,3,4,["feather", "string"]])
+  end
+
+  it 'will use the push method to insert a hash into an array' do
+    arr.push({}).should eq([1,2,3,4,{}])
+  end
+
+  it 'will use the arrows to insert an integer into an array' do
+    (arr << 6).should eq([1,2,3,4,6])
+  end
 end

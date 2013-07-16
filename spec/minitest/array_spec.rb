@@ -65,4 +65,29 @@ class TestArray < Minitest::Test
   def test_empty_method_on_array
     assert_equal [1,2,3,4].empty?, false   
   end
+
+
+  def test_push_method_with_integer
+    assert_equal [1,2,3].push(4), [1,2,3,4]
+  end
+
+  def test_push_method_with_string
+    assert_equal [1,2,3].push("bobby"), [1,2,3,"bobby"]
+  end
+
+  def test_push_method_with_symbol
+    assert_equal [1,2,3].push(:bob), [1,2,3,:bob]
+  end
+
+  def test_push_method_with_array
+    assert_equal [1,2,3].push(["robert"]), [1,2,3,["robert"]]
+  end
+
+  def test_push_method_with_hash
+    assert_equal [1,2,3].push({}), [1,2,3,{}]
+  end
+
+  def test_push_method_using_arrows
+    assert_equal ([1,2,3] << 4), [1,2,3,4]
+  end
 end
