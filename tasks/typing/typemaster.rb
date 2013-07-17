@@ -7,9 +7,13 @@ class TypeMaster < Sinatra::Base
     haml :client
   end
 
-  get '/easy.json' do
+  get '/level/:difficulty' do
   	content_type :json
-  	arr = RandomWord.adjs.to_a.take(5)
+    if params[:difficulty] == 'medium'
+      arr = RandomWord.adjs.to_a.take(25)
+    else
+      arr = RandomWord.adjs.to_a.take(5)
+    end
 
   	hash = Hash[arr.each_with_index.map{|value, idx| [idx, value]}]
   	# hash = Hash[arr.map{|value| words: {value}}]

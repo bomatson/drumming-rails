@@ -36,9 +36,9 @@ def evaluate(word)
   end 
 end
 
-def start_game(user, conn)
+def start_game(user, conn, difficulty = {})
 
-  response = conn.get '/easy.json'
+  response = conn.get "/level/#{difficulty}"
 
   JSON.parse(response.body).each do |word|
   	puts "#{user}, this is word #{word[0]}"
@@ -49,7 +49,7 @@ def start_game(user, conn)
   end
 end
 
-start_game(introduction, conn)
+start_game(introduction, conn, "easy")
 
 puts "You missed the following words:"
 
@@ -61,4 +61,10 @@ puts "You got the following words:"
 
 SUCCESSES.each do |f|
   puts f
+end
+
+if SUCCESSES.length > 3
+  start_game(introduction, conn, "medium")
+else
+  start_game(introduction, conn, "easy")
 end
