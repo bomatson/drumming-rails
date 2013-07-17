@@ -88,4 +88,20 @@ describe 'Array Test' do
   it 'will use the arrows to insert an integer into an array' do
     (arr << 6).should eq([1,2,3,4,6])
   end
+
+  it 'will use unshift to add an element at the beginning of an array' do
+    arr.unshift(0).should eq([0,1,2,3,4 ])
+  end
+
+  it 'will use unshift to add an element at the beginning of an array' do
+    arr.unshift(0).should eq([0,1,2,3,4 ])
+  end
+
+  it 'will use insert to add an element at any position in an array' do
+    arr.insert(3, "booga").should eq([1,2,3, "booga",4 ])
+  end
+
+  it 'will use insert to add multiple elements at any position in an array' do
+    arr.insert(1, "booga", "wooga").should eq([1, "booga", "wooga", 2, 3, 4])
+  end
 end

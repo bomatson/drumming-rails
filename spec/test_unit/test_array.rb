@@ -89,4 +89,16 @@ class ArrayTest < Test::Unit::TestCase
   def test_push_method_using_arrows
     assert_equal ([1,2,3] << 4), [1,2,3,4]
   end
+
+  def test_unshift_add_to_beginning_of_array
+    assert_equal [1,2,3].unshift(0), [0,1,2,3]
+  end
+
+  def test_insert_add_anywhere_in_array
+    assert_equal [1,2,3].insert(1, "booga"), [1,"booga",2,3]
+  end
+
+  def test_insert_add_multiple_anywhere_in_array
+    assert_equal [1,2,3].insert(1, "booga", "wooga"), [1,"booga", "wooga",2,3]
+  end
 end
