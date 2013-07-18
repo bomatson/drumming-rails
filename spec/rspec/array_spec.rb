@@ -104,4 +104,13 @@ describe 'Array Test' do
   it 'will use insert to add multiple elements at any position in an array' do
     arr.insert(1, "booga", "wooga").should eq([1, "booga", "wooga", 2, 3, 4])
   end
+
+  it 'will use pop to grab last element of an array' do
+    arr.pop.should eq(4)
+  end
+
+  it 'will change the array to not have the last element with pop' do
+    arr.pop
+    arr.should eq([1,2,3])
+  end
 end

@@ -103,4 +103,7 @@ class TestArray < Minitest::Test
     assert_equal [1,2,3].insert(1, "booga", "wooga"), [1,"booga", "wooga",2,3]
   end
 
+  def test_pop_grabs_last_element
+    assert_equal [1,2,3].pop, 3
+  end
 end
