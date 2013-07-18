@@ -36,10 +36,40 @@ def evaluate(word)
   end 
 end
 
+def post_score
+  puts "You missed the following words:"
+
+  FAILURES.each do |f|
+    puts f
+  end
+
+  puts "You got the following words:"
+
+  SUCCESSES.each do |f|
+    puts f
+  end
+end
+
+
+def check_resume(user, conn)
+  wins = SUCCESSES.length
+  if wins > 10
+    start_game(user, conn, "hard")
+  elsif wins <= 10 && wins > 3 
+    start_game(user, conn, "medium")
+  else
+    puts "Please try again!"
+    start_game(user, conn, "easy")
+  end
+end
+
 def start_game(user, conn, difficulty = {})
 
   response = conn.get "/level/#{difficulty}"
 
+  puts "Welcome to the #{difficulty} level. Please press enter to proceed"
+  STDIN.gets.chomp()
+  
   JSON.parse(response.body).each do |word|
   	puts "#{user}, this is word #{word[0]}"
     %x(say #{word[1]})
@@ -47,24 +77,10 @@ def start_game(user, conn, difficulty = {})
     evaluate(word[1])
     next
   end
+
+  post_score
+  check_resume(user, conn)
 end
 
 start_game(introduction, conn, "easy")
 
-puts "You missed the following words:"
-
-FAILURES.each do |f|
-  puts f
-end
-
-puts "You got the following words:"
-
-SUCCESSES.each do |f|
-  puts f
-end
-
-if SUCCESSES.length > 3
-  start_game(introduction, conn, "medium")
-else
-  start_game(introduction, conn, "easy")
-end

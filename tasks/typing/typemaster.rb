@@ -9,7 +9,9 @@ class TypeMaster < Sinatra::Base
 
   get '/level/:difficulty' do
   	content_type :json
-    if params[:difficulty] == 'medium'
+    if params[:difficulty] == 'hard'
+      arr = RandomWord.adjs.to_a.take(50)
+    elsif params[:difficulty] == 'medium'
       arr = RandomWord.adjs.to_a.take(25)
     else
       arr = RandomWord.adjs.to_a.take(5)
