@@ -9,16 +9,16 @@ class TypeMaster < Sinatra::Base
 
   get '/level/:difficulty' do
   	content_type :json
-    if params[:difficulty] == 'hard'
-      arr = RandomWord.adjs.to_a.take(50)
-    elsif params[:difficulty] == 'medium'
-      arr = RandomWord.adjs.to_a.take(25)
+    adjectives = case params[:difficulty]
+    when 'hard'
+      RandomWord.adjs.to_a.take(50)
+    when 'medium'
+      RandomWord.adjs.to_a.take(25)
     else
-      arr = RandomWord.adjs.to_a.take(5)
+      RandomWord.adjs.to_a.take(5)
     end
 
-  	hash = Hash[arr.each_with_index.map{|value, idx| [idx, value]}]
-  	# hash = Hash[arr.map{|value| words: {value}}]
+  	hash = Hash[adjectives.each_with_index.map{|word, idx| [idx, word]}]
   	hash.to_json
   end
 end
