@@ -70,11 +70,12 @@ def start_game(user, conn, difficulty = {})
   puts "Welcome to the #{difficulty} level. Please press enter to proceed"
   STDIN.gets.chomp()
   
-  JSON.parse(response.body).each do |word|
-  	puts "#{user}, this is word #{word[0]}"
-    %x(say #{word[1]})
+  JSON.parse(response.body).each do |word_and_id|
+    id, word = word_and_id
+  	puts "#{user}, this is word #{id}"
+    %x(say #{word})
 
-    evaluate(word[1])
+    evaluate(word)
     next
   end
 

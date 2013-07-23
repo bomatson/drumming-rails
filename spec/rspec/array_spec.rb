@@ -4,6 +4,8 @@ require "rspec"
 describe 'Array Test' do
 
   let(:arr){ [1,2,3,4]}
+  let(:nilled) { [1, nil, 2, nil] }
+  let(:dupes) { [1,2,2,1] }
 
   it 'should allow literal construction of an array' do
     [1,2,3].should be_kind_of(Array)
@@ -143,5 +145,34 @@ describe 'Array Test' do
 
   it 'will return nil if the object is not in the array' do
     arr.delete("barry").should be_nil
+  end
+
+  it 'will remove nil values with compact' do
+    nilled.compact.should eq([1,2])
+  end
+
+  it 'will remove nil values with compact but array remains unchanged' do
+    nilled.compact
+    nilled.should eq([1, nil, 2, nil])
+  end
+
+
+  it 'will remove nil values with compact and change array with bang' do
+    nilled.compact!
+    nilled.should eq([1,2])
+  end
+
+  it 'will remove dupes with uniq' do
+    dupes.uniq.should eq([1,2])
+  end
+
+  it 'will remove dupes with uniq but leave array unchanged' do
+    dupes.uniq
+    dupes.should eq([1,2,2,1])
+  end
+
+  it 'will remove dupes with uniq and destruct the array with bang' do
+    dupes.uniq!
+    dupes.should eq([1,2])
   end
 end

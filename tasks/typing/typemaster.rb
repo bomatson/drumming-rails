@@ -17,8 +17,5 @@ class TypeMaster < Sinatra::Base
     else
       RandomWord.adjs.to_a.take(5)
     end
-
-  	hash = Hash[adjectives.each_with_index.map{|word, idx| [idx, word]}]
-  	hash.to_json
   end
 end
