@@ -113,4 +113,35 @@ describe 'Array Test' do
     arr.pop
     arr.should eq([1,2,3])
   end
+
+  it 'will retrieve the first element of an array with shift' do
+    arr.shift.should eq(1)
+  end
+
+  it 'will remove the first element of an array with shift' do
+    arr.shift
+    arr.should eq([2,3,4])
+  end
+
+  it 'will delete_at a certain index' do
+    arr.delete_at(0).should eq(1)
+  end
+
+  it 'will delete_at a certain index and modify the array' do
+    arr.delete_at(0)
+    arr.should eq([2,3,4])
+  end
+
+  it 'will retrieve an object with delete' do
+    arr.delete(1).should eq(1)
+  end
+
+  it 'will delete an object from the array' do
+    arr.delete(1)
+    arr.should eq([2,3,4])
+  end
+
+  it 'will return nil if the object is not in the array' do
+    arr.delete("barry").should be_nil
+  end
 end
