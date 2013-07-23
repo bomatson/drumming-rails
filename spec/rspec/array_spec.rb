@@ -175,4 +175,30 @@ describe 'Array Test' do
     dupes.uniq!
     dupes.should eq([1,2])
   end
+
+  it 'will use each to perform an operation on each elem of the array' do
+    arr.each {|a| a.should eq(a) }
+  end
+
+  it 'will use each without changing the element of the array' do
+    (arr.each {|a| a*2 }).should eq([1,2,3,4])
+  end
+  
+  it 'will use reverse_each without changing the element of the array' do
+    (arr.reverse_each {|a| a*2 }).should eq([1,2,3,4])
+  end
+
+  it 'will use reverse_each to perform an operation starting from the last elem of the array' do
+    mod = []
+    arr.reverse_each {|a| mod << a*2 }
+    mod.should eq([8,6,4,2])
+  end
+
+  it 'will use map to create a new array' do
+    arr.map {|a| a }.should_not be(arr)
+  end
+
+  it 'will use map to create a new array with each elem modified' do
+    arr.map {|a| a*2 }.should eq([2,4,6,8])
+  end
 end
