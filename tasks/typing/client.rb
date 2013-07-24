@@ -24,8 +24,6 @@ def evaluate(word)
       if answer == word
         puts "Right!"
         SUCCESSES << word
-      elsif answer == "stop"
-        break
       else
         puts "Wrong!"
         FAILURES << word

@@ -27,3 +27,5 @@ http://railscasts.com/episodes/162-tree-based-navigation-revised
 http://railscasts.com/episodes/165-edit-multiple-revised
 
 http://railscasts.com/episodes/193-tableless-model
+
+http://railscasts.com/episodes/65-stopping-spam-with-akismet

@@ -201,4 +201,26 @@ describe 'Array Test' do
   it 'will use map to create a new array with each elem modified' do
     arr.map {|a| a*2 }.should eq([2,4,6,8])
   end
+
+  it 'will use selection with an array' do
+    arr.select {|a| a < 2 }.should eq([1])
+  end
+
+  it 'will use rejection with an array' do
+    arr.reject {|a| a < 2 }.should eq([2,3,4])
+  end
+
+  it 'will use drop_while with an array' do
+    arr.drop_while {|a| a < 2 }.should eq([2,3,4])
+  end
+
+  it 'will be non-destructive using selection with an array' do
+    arr.select {|a| a < 2 }
+    arr.should be(arr)
+  end
+
+  it 'will be non-destructive using rejection with an array' do
+    arr.reject {|a| a < 2 }
+    arr.should be(arr)
+  end
 end
