@@ -6,6 +6,7 @@ describe 'Array Test' do
   let(:arr){ [1,2,3,4]}
   let(:nilled) { [1, nil, 2, nil] }
   let(:dupes) { [1,2,2,1] }
+  let(:gotchya) { Array.new(2, Hash.new)}
 
   it 'should allow literal construction of an array' do
     [1,2,3].should be_kind_of(Array)
@@ -223,4 +224,47 @@ describe 'Array Test' do
     arr.reject {|a| a < 2 }
     arr.should be(arr)
   end
+
+  it 'will use delete_if to delete parts of an array' do
+    arr.delete_if {|a| a < 2 }.should eq([2,3,4])
+  end
+
+  it 'will be destructive using delete_if with an array' do
+    arr.delete_if {|a| a < 2 }
+    arr.should eq([2,3,4])
+  end
+
+  it 'will use keep_if to retain parts of an array' do
+    arr.keep_if {|a| a < 2 }.should eq([1])
+  end
+  
+  it 'will be destructive using keep_if with an array' do
+    arr.keep_if {|a| a < 2 }
+    arr.should eq([1])
+  end
+
+  it 'will use brackets to create an empty array' do
+    [].should be_kind_of(Array)
+  end
+
+  it 'will use brackets to implicitly create an array with objects' do
+    ["bobby", 2].should eq(["bobby", 2])
+  end
+
+  it 'will use brackets to pass in args and create an array with objects' do
+    Array.[]("bobby", 2).should eq(["bobby", 2])
+  end
+
+  it 'will create a copy of the array if it passed in with new' do
+    second_arr = Array.new(arr)
+    second_arr.should_not equal(arr)
+  end
+
+  it 'will use the second parameter as the object for ALL array elements' do
+    gotchya[0]["bobs"] = 'matson'
+    gotchya.should eq([{"bobs"=> "matson"},{"bobs"=> "matson"} ])
+    #since all the array elements store the same hash, changing on affects them all
+  end
+
 end
+
