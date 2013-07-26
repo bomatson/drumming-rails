@@ -266,5 +266,50 @@ describe 'Array Test' do
     #since all the array elements store the same hash, changing on affects them all
   end
 
+  it 'will use try_convert to turn object into an array' do
+    Array.try_convert([1]).should eq([1])
+  end
+
+  it 'will use try_convert to return nil if object cannot be converted' do
+    Array.try_convert("gary").should be_nil
+    #whats the point of this?
+  end
+
+  it 'will use & to return an array with common elements from two arrays' do
+    (arr & nilled).should eq([1,2]) 
+  end
+
+  it 'will use & to return an array without any duplication' do
+    (arr & dupes).should eq([1,2]) 
+    #cool!
+  end
+
+  it 'will use * with integer to concatenate int copies of self' do
+    (arr * 2).should eq([1,2,3,4,1,2,3,4])
+  end
+
+  it 'will use * with string to create a new string, equivalent to join' do
+    (arr * ":").should eq("1:2:3:4")
+  end
+
+  it 'will use + to concatenate both arrays' do
+    (arr + nilled).should eq([1,2,3,4,1, nil, 2, nil])
+  end
+
+  it 'will use - to remove elements that appear in second array' do
+    (arr - nilled).should eq([3,4])
+  end
+
+  it 'will use - to remove duplicate elements' do
+    (dupes - arr).should eq([])
+  end
+
+  it 'will use << to add objects to an array' do
+    (arr << "robert").should eq([1,2,3,4, "robert"])
+  end
+
+  it 'will use << to chain multiple objects to an array' do
+    (arr << "robert" << 34 << ['whoa!', 'larry!']).should eq([1,2,3,4,"robert", 34,['whoa!','larry!']])
+  end
 end
 
