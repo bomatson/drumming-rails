@@ -17,5 +17,12 @@ class TypeMaster < Sinatra::Base
     else
       RandomWord.adjs.to_a.take(5)
     end
+    adjectives.to_json
   end
 end
+
+
+# adjs = RandomWord.adjs.to_a.take(100)
+# longer_words = adjs.select {|word| word.size > 10}
+# in_the_thousand_most common
+# outside_the_most_commmon

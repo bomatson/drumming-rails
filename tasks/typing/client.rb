@@ -17,10 +17,13 @@ def introduction
   return user
 end
 
+# stub timeout
+# stub puts and gets
+# mock successes and failures
 def evaluate(word)
   begin 
     Timeout::timeout(5) do
-      answer = STDIN.gets.chomp()
+      answer = gets.chomp()
       if answer == word
         puts "Right!"
         SUCCESSES << word
@@ -66,12 +69,12 @@ def start_game(user, conn, difficulty = {})
   response = conn.get "/level/#{difficulty}"
 
   puts "Welcome to the #{difficulty} level. Please press enter to proceed"
-  STDIN.gets.chomp()
+  gets.chomp()
   
-  JSON.parse(response.body).each do |word_and_id|
-    id, word = word_and_id
-  	puts "#{user}, this is word #{id}"
-    %x(say #{word})
+  JSON.parse(response.body).each do |word|
+    puts "#{word}"
+  	# puts "#{user}, this is word #{id}"
+    %x(say -v Victoria #{word})
 
     evaluate(word)
     next
@@ -82,4 +85,3 @@ def start_game(user, conn, difficulty = {})
 end
 
 start_game(introduction, conn, "easy")
-
