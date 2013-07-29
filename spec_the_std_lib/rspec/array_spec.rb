@@ -311,5 +311,26 @@ describe 'Array Test' do
   it 'will use << to chain multiple objects to an array' do
     (arr << "robert" << 34 << ['whoa!', 'larry!']).should eq([1,2,3,4,"robert", 34,['whoa!','larry!']])
   end
+
+  it 'will use << to add objects to an array' do
+    (arr << "robert").should eq([1,2,3,4, "robert"])
+  end
+
+  it 'will use rocket comparison to return +1 if the array is greater than other' do
+    (arr <=> dupes).should eq(1)
+    #values of each element in array are evaluated
+  end
+
+  it 'will use rocket comparison to return -1 if the array is less than other' do
+    (dupes <=> arr).should eq(-1)
+  end
+
+  it 'will use rocket comparison to return nil if uncomparable' do
+    (arr <=> gotchya).should be_nil
+  end
+
+  it 'will use length with rocket comparison to determine which is greater' do
+    (arr <=> [1,2]).should eq(1)
+  end
 end
 
