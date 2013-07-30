@@ -1,6 +1,6 @@
 require 'json'
 require 'random-word'
-require 'sinatra/base'
+require 'sinatra'
 
 class TypeMaster < Sinatra::Base
   get '/typemaster-flex' do
