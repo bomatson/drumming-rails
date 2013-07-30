@@ -332,5 +332,41 @@ describe 'Array Test' do
   it 'will use length with rocket comparison to determine which is greater' do
     (arr <=> [1,2]).should eq(1)
   end
+
+  it 'will use equality operator and be true if each element is equal' do
+    (arr == arr).should be_true
+  end
+
+  it 'will use equality operator and be false if the length is unequal' do
+    (arr == [1,2,3]).should be_false
+  end
+
+  it 'will use equality operator and be false if an element is unequal' do
+    (arr == [1,2,3, "gary"]).should be_false
+  end
+
+  it 'will use element reference with an index' do
+    arr[0].should eq(1)
+  end
+
+  it 'will use element reference with an index to return nil if no element exists' do
+    arr[5].should be_nil
+  end
+
+  it 'will use negative element reference with an index' do
+    arr[-1].should eq(4)
+  end
+
+  it 'will use element reference with an index then length of objects to reference' do
+    arr[0,3].should eq([1,2,3])
+  end
+
+  it 'will use element reference with a range of indices' do
+    arr[0..3].should eq([1,2,3,4])
+  end
+
+  it 'will use element reference with an operator to combine elements' do
+    (arr[0] + arr[3]).should eq(5)
+  end
 end
 
