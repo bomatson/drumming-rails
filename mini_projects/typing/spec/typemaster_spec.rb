@@ -1,4 +1,4 @@
-require_relative 'typemaster.rb'
+require_relative '../typemaster.rb'
 require 'rspec'
 require 'rack/test'
 
