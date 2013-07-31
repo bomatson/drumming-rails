@@ -78,5 +78,11 @@ describe 'Typemaster Flex' do
 			get '/level/hard'
 			@response = JSON.parse(last_response.body)
 		end
+
+		it 'should have each word be more than 10 letters' do
+			@response.each {|word|
+				word.length.should > 10
+			}
+		end
 	end
 end

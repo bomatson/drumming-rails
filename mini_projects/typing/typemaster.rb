@@ -3,9 +3,29 @@ require 'random-word'
 require 'sinatra'
 
 class TypeMaster < Sinatra::Base
+
+  before do
+    @heading = "Typemaster Flex"
+  end
+
   get '/typemaster-flex' do
     haml :client
   end
+
+  #example:
+  
+  get '/user/:first/?:last?' do 
+    "Your input is #{params[:first]} #{params[:last]}"
+  end
+
+  get '/:answer' do
+    #check if input matches word
+  end
+
+  #right now I get an array of answers that I can render in a view
+  #using an instance variable
+  #I need a way to accept an input and post an answer
+  #which will then check if the input matches the word 
 
   get '/level/:difficulty' do
   	content_type :json
