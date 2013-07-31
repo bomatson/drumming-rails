@@ -40,6 +40,12 @@ describe 'Typemaster Flex' do
 		it 'should return 5 words' do
 			@response.length.should eq(5)
 		end
+
+		it 'should have each word be no greater than 5 letters' do
+			@response.each {|word|
+				word.length.should <= 5
+			}
+		end
 	end
 
 	describe 'medium level' do
@@ -52,6 +58,18 @@ describe 'Typemaster Flex' do
 		it 'should return 25 words' do
 			@response.length.should eq(25)
 		end
+
+		it 'should have each word be greater than 5 letters' do
+			@response.each {|word|
+				word.length.should > 5
+			}
+		end
+
+		it 'should have each word be less than 10 letters' do
+			@response.each {|word|
+				word.length.should <= 10
+			}
+		end
 	end
 
 	describe 'hard level' do
@@ -59,10 +77,6 @@ describe 'Typemaster Flex' do
 		before(:each) do
 			get '/level/hard'
 			@response = JSON.parse(last_response.body)
-		end
-
-		it 'should return 50 words' do
-			@response.length.should eq(50)
 		end
 	end
 end

@@ -9,20 +9,21 @@ class TypeMaster < Sinatra::Base
 
   get '/level/:difficulty' do
   	content_type :json
+
+    adjs = RandomWord.adjs.to_a.take(100)
+
     adjectives = case params[:difficulty]
     when 'hard'
-      RandomWord.adjs.to_a.take(50)
+      adjs.select {|word| word.size > 10}
     when 'medium'
-      RandomWord.adjs.to_a.take(25)
+      med = adjs.select {|word| word.size <= 10 && word.size > 5 }
+      med[0..24]
     else
-      RandomWord.adjs.to_a.take(5)
+      easy = adjs.select {|word| word.size <= 5}
+      easy[0..4]
     end
     adjectives.to_json
   end
 end
 
 
-# adjs = RandomWord.adjs.to_a.take(100)
-# longer_words = adjs.select {|word| word.size > 10}
-# in_the_thousand_most common
-# outside_the_most_commmon
