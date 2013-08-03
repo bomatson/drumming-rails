@@ -368,5 +368,42 @@ describe 'Array Test' do
   it 'will use element reference with an operator to combine elements' do
     (arr[0] + arr[3]).should eq(5)
   end
+
+  it 'will use element assisngment to add an object at a certain index' do
+    arr[4] = 'Gary'
+    arr.should eq([1,2,3,4,'Gary'])
+  end
+
+  it 'will add nil values if assignment is outside of current index' do
+    arr[6] = "face"
+    arr.should eq([1,2,3,4,nil,nil,"face"])
+  end
+
+  it 'will use a length with element assignment' do
+    arr[4,3] = ["gary", "face", "too"]
+    arr.should eq([1,2,3,4,"gary", "face", "too"])
+  end
+
+  it 'will use element assignment with a range to insert a single value' do
+    arr[0..2] = "bob"
+    arr.should eq(["bob", 4])
+  end
+
+  it 'will use element assignment with a range to insert multiple values' do
+    arr[0..2] = ["bob", "bobert", "gary"]
+    arr.should eq(["bob", "bobert", "gary", 4])
+  end
+
+  it 'will use assoc to find the first array that begins with that object' do
+    [arr, dupes].assoc(1).should eq(arr)
+  end
+
+  it 'will use assoc and return nil if the first array does not begin with that object' do
+    [arr, dupes].assoc(2).should be_nil
+  end
+
+  it 'will use at for element reference on the index' do
+    arr.at(3).should eq(4)
+  end
 end
 
