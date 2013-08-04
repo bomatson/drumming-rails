@@ -405,5 +405,15 @@ describe 'Array Test' do
   it 'will use at for element reference on the index' do
     arr.at(3).should eq(4)
   end
+
+#bsearch?
+
+  it 'will use clear to remove all elements from self' do
+    arr.clear.should be_empty 
+  end
+
+  it 'will use collect to invoke the block for each element of self' do
+    arr.collect{|x|x+1}.should eq([2,3,4,5])
+  end
 end
 
