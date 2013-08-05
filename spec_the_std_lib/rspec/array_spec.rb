@@ -415,5 +415,40 @@ describe 'Array Test' do
   it 'will use collect to invoke the block for each element of self' do
     arr.collect{|x|x+1}.should eq([2,3,4,5])
   end
+
+  it 'will use combination to yield all combos of length n of elements from the array' do
+    arr.combination(2).to_a.should eq([[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]])
+  end
+
+  it 'will yield empty array if there are no combos of length n' do
+    arr.combination(5).to_a.should be_empty
+  end
+
+  it 'will use compact to return copy of self without nil values' do
+    nilled.compact.should eq([1,2])
+  end
+  
+  it 'will use compact! to return nil if there are no nil values in the array' do
+    arr.compact!.should be_nil
+  end
+
+  it 'will use count to return the number of elements in the array' do
+    arr.count.should eq(4)
+  end
+
+  it 'will use count to return the number of elements true in a block' do
+    arr.count{|x| x % 2 == 0}.should eq(2)
+  end
+
+  it 'will use delete to remove items where self is equal to obj' do
+    dupes.delete(2)
+    dupes.should eq([1,1])
+  end
+
+  it 'will use delete at to remove items at the index' do
+    arr.delete_at(2)
+    arr.should eq([1,2,4])
+  end
+
 end
 
