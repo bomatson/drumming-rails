@@ -458,8 +458,38 @@ describe 'Array Test' do
     arr.drop_while{|i| i < 3}.should eq([3,4])
   end
 
-  it 'will use each to call each element in self, passing arg as a param' do
-    arr.each{|i| i + 1}.should eq([2,3,4,5])
+  it 'will use empty to check there are no contents in the array' do
+    arr.empty?.should be_false
+  end
+
+  it 'will call items in array with each' do
+    yielded = []
+    arr.each { |e| yielded << (e + 1) }
+    yielded.should eq([2,3,4,5])
+  end
+
+  it 'will use fetch to grab an item by index' do
+    arr.fetch(2).should eq(3)
+  end
+
+  it 'will use fetch to raise error if index is out of bounds' do
+    expect {arr.fetch(5)}.to raise_error(IndexError)
+  end
+
+  it 'will use fill to replace each item in the array' do
+    arr.fill("gary").should eq(["gary", "gary", "gary", "gary"])
+  end
+
+  it 'will use fill to replace an item at a particular index in the array' do
+    arr.fill("gary", 2, 1).should eq([ 1, 2, "gary", 4,])
+  end
+
+  it 'will use fill to replace an item over a length in the array' do
+    arr.fill("gary", 2, 2).should eq([ 1, 2, "gary", "gary",])
+  end
+
+  it 'will use find_index to return the index of a value' do
+    arr.find_index(2).should eq(1)
   end
 end
 
