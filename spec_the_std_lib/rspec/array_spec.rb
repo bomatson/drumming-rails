@@ -3,9 +3,9 @@ require "rspec"
 
 describe 'Array Test' do
 
-  let(:arr){ [1,2,3,4]}
-  let(:nilled) { [1, nil, 2, nil] }
-  let(:dupes) { [1,2,2,1] }
+  let(:arr)     { [1,2,3,4]}
+  let(:nilled)  { [1, nil, 2, nil] }
+  let(:dupes)   { [1,2,2,1] }
   let(:gotchya) { Array.new(2, Hash.new)}
 
   it 'should allow literal construction of an array' do
@@ -450,5 +450,16 @@ describe 'Array Test' do
     arr.should eq([1,2,4])
   end
 
+  it 'will use drop to remove n elements in the array starting from the beginning' do
+    arr.drop(1).should eq([2,3,4])
+  end
+
+  it 'will use drop_while to remove up to but not including first element for which block returns nil or false' do
+    arr.drop_while{|i| i < 3}.should eq([3,4])
+  end
+
+  it 'will use each to call each element in self, passing arg as a param' do
+    arr.each{|i| i + 1}.should eq([2,3,4,5])
+  end
 end
 
