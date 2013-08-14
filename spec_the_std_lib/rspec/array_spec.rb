@@ -7,6 +7,7 @@ describe 'Array Test' do
   let(:nilled)  { [1, nil, 2, nil] }
   let(:dupes)   { [1,2,2,1] }
   let(:gotchya) { Array.new(2, Hash.new)}
+  let(:recursive) {[arr, dupes, [3 , 4, [5]]]}
 
   it 'should allow literal construction of an array' do
     [1,2,3].should be_kind_of(Array)
@@ -490,6 +491,48 @@ describe 'Array Test' do
 
   it 'will use find_index to return the index of a value' do
     arr.find_index(2).should eq(1)
+  end
+
+  it 'will use first to return the first object in the array' do
+    arr.first.should eq(1)
+  end
+
+  it 'will use first with a length arg to return first n objects in arr' do
+    arr.first(2).should eq([1,2])
+  end
+
+  it 'will use flatten to extract each element into a new array' do
+    recursive.flatten.should eq([1, 2, 3, 4, 1, 2, 2, 1, 3, 4, 5])
+  end
+
+  it 'will use flatten with level arg to determine level of recursion' do
+    recursive.flatten(1).should eq([1, 2, 3, 4, 1, 2, 2, 1, 3, 4, [5]])
+  end
+
+  it 'will use freeze to prevent any changes from being made to the Obj' do
+    expect {arr.freeze << 5}.to raise_error
+  end
+
+  it 'will use frozen to check if an array has been frozen' do
+    arr.freeze
+    arr.frozen?.should be_true
+  end
+
+  it 'will compute hash code for any array that is a fixnum' do
+    arr.hash.should be_kind_of(Fixnum)
+  end
+
+  it 'will compute same hash code if array has same content' do
+    arr.hash.should eq([1,2,3,4].hash)
+    # this uses eql?
+  end
+
+  it 'will use include? to check if an item is in the array' do
+    arr.include?(1).should be_true
+  end
+
+  it 'will use include? to check if an item is not in the array' do
+    arr.include?("x").should be_false
   end
 end
 
