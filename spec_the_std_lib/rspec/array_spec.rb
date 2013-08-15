@@ -534,5 +534,21 @@ describe 'Array Test' do
   it 'will use include? to check if an item is not in the array' do
     arr.include?("x").should be_false
   end
+
+  it 'should use insert to add elements at specific index point in arr' do
+    arr.insert(2, 'something').should eq([1,2,'something',3,4])
+  end
+
+  it 'will use inspect to turn the array into a string' do
+    arr.inspect.should eq("[1, 2, 3, 4]")
+  end
+
+  it 'will use join to turn each element of arr into one string' do
+    arr.join.should eq("1234")
+  end
+
+  it 'will use join wtih a separator as an arg' do
+    arr.join(',').should eq('1,2,3,4')
+  end
 end
 
