@@ -1,6 +1,7 @@
-require 'unimidi'
+require 'micromidi'
 
-input = UniMIDI::Input.first
+input = UniMIDI::Input.first\
+
 input.open do |input|
 
   loop do
@@ -23,3 +24,6 @@ input.open do |input|
     end
   end
 end
+
+# maybe play files from web with midi controller
+# possible move on to resolume now, have controller trigger visuals
