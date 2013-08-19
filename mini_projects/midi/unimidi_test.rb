@@ -6,8 +6,11 @@ input.open do |input|
   loop do
     m = input.gets
     $stdout.puts(m)
+    data = m.first[:data]
 
-    element = m.first[:data].first
+    element = data.first
+    note = data[1]
+    velocity = data[2]
 
     case element
     when 191
