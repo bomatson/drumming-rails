@@ -550,5 +550,17 @@ describe 'Array Test' do
   it 'will use join wtih a separator as an arg' do
     arr.join(',').should eq('1,2,3,4')
   end
+
+  it 'will use last to pull out the last element in an array' do
+    arr.last.should eq (4)
+  end
+
+  it 'will use last with arguments to create a new array with the last n elements' do
+    arr.last(2).should eq([3,4])
+  end
+
+  it 'will use length to return number of elements in self' do
+    arr.length. should eq(4)
+  end
 end
 

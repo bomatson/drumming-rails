@@ -1,6 +1,6 @@
 require 'micromidi'
 
-input = UniMIDI::Input.first\
+input = UniMIDI::Input.first
 
 input.open do |input|
 
@@ -18,7 +18,6 @@ input.open do |input|
       puts 'I am a knob'
     when 159, 143
       puts 'Playing the keys'
-      `afplay ~/Desktop/epic-drum.wav`
     else
       puts 'Something else'
     end
