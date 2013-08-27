@@ -7,14 +7,14 @@ def setup
   frame_rate 30
   smooth
   fill 0
+  color_mode RGB, 100
 end
 
-end
 def draw
   @input.open do |input|
     m = input.gets
     data = m.first[:data]
-    puts data
-    background data.first
+    background rand(255), data[1], rand(255)
   end
+  triangle(rand(width), rand(height), rand(width), rand(height), rand(width), rand(height))
 end
