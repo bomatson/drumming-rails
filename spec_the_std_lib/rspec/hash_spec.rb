@@ -2,7 +2,7 @@ require "rubygems"
 require "rspec"
 
 describe Hash do
-	let(:hash) {{a: "a", b: "b"}}
+	let(:hash) {{a: 1234, b: 'string'}}
 
   it 'is an instance of Hash' do
     expect(hash).to be_instance_of Hash
@@ -38,4 +38,23 @@ describe Hash do
       expect(hash.default).to eq 0
     end
   end
+
+ context 'accesses its values' do
+   it 'using a symbol reference if the key is a symbol' do
+     expect(hash[:a]).to eq 1234
+   end
+
+   it 'without using a string reference if the key is a symbol' do
+     expect(hash['a']).to_not eq 1234
+   end
+
+   it 'using the values method' do
+     expect(hash.values).to eq [1234, 'string']
+   end
+
+   it 'with the ability to override the value' do
+     hash[:a] = 123
+     expect(hash[:a]).to eq 123
+   end
+ end
 end
