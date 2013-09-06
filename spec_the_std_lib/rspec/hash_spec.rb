@@ -33,9 +33,25 @@ describe Hash do
       expect(Hash.new("rabbit").default).to eq "rabbit"
     end
 
-    it 'sets the default using the default method' do
-      hash.default = 0
-      expect(hash.default).to eq 0
+    context 'given a default value' do
+      before do
+        hash.default = 'cats'
+      end
+
+      it 'accesses the default using the default method' do
+        expect(hash.default).to eq 'cats'
+      end
+
+      it 'will reference the default if the key is not found' do
+        expect(hash['goober']).to eq 'cats'
+      end
+
+      it 'will use a proc to change the default value' do
+        hash.default_proc = proc do |hash, key|
+          hash[key] = 'you should not have said ' + key
+        end
+        expect(hash['goober']).to eq 'you should not have said goober'
+      end
     end
   end
 
@@ -65,14 +81,15 @@ describe Hash do
 
   context 'uses equality to compare hashes' do
     let(:identical) {{a: 1234, b: 'string'}}
-   
+
     it 'with the == operator' do
      expect(identical == hash).to be true
     end
   end
 
   context 'manipulates its objects' do
-    
+    let(:mani) {{'a' => 100, b: 'unchanged'}}
+
     it 'with clear to empty the hash' do
       expect(hash.clear).to be_empty
     end
@@ -82,8 +99,15 @@ describe Hash do
       expect(hash).to_not include 1234
     end
 
-    it 'with delete to return nil if key is not present' do 
+    it 'with delete to return nil if key is not present' do
       expect(hash.delete(:z)).to be_nil
+    end
+
+    it 'with compare_by_identity to reference objects in hash using object_ids' do
+      # note that symbols have the same object_id, so they are unaffected
+      # the hash evaluates reference using equal? instead of eql?
+      mani.compare_by_identity
+      expect(mani['a']).to be_nil
     end
   end
 end
