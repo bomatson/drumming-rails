@@ -115,5 +115,11 @@ describe Hash do
         hash.delete_if{ |key| key == :b}
       ).to eq({a: 1234})
     end
+
+    it 'with each method, passing the key and value as params in a block' do
+      expect(
+        hash.each {}
+      )
+    end
   end
 end
