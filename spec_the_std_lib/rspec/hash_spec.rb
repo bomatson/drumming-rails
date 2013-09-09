@@ -109,5 +109,11 @@ describe Hash do
       mani.compare_by_identity
       expect(mani['a']).to be_nil
     end
+
+    it 'using delete if in a block to remove elements from a hash' do
+      expect(
+        hash.delete_if{ |key| key == :b}
+      ).to eq({a: 1234})
+    end
   end
 end
