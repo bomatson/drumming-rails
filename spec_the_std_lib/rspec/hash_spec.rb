@@ -116,10 +116,32 @@ describe Hash do
       ).to eq({a: 1234})
     end
 
-    it 'with each method, passing the key and value as params in a block' do
-      expect(
-        hash.each {}
-      )
+    context 'iterating' do
+      let(:args) { [] }
+
+      it 'with each method, passing the key and value as params in a block' do
+        hash.each {|key, value| args << key}
+        args.should eq([:a, :b])
+      end
+
+      it 'with each method as an enumerator if no block is passed' do
+        expect(hash.each).to be_kind_of Enumerator
+      end
+
+      it 'with each_pair having the same behavior as each' do
+        hash.each_pair {|key, value| args << key}
+        args.should eq([:a, :b])
+      end
+
+      it 'with each_key passing only the key as a param' do
+        hash.each_key {|key| args << key}
+        args.should eq([:a, :b])
+      end
+
+      it 'with each_value passing only the value as a param' do
+        hash.each_value {|value| args << value}
+        args.should eq([1234, 'string'])
+      end
     end
   end
 end
