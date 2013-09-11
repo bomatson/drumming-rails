@@ -143,5 +143,25 @@ describe Hash do
         args.should eq([1234, 'string'])
       end
     end
+
+    it 'with empty? to see if the hash has no key-value pairs' do
+      expect(hash.empty?).to be_false
+      expect({}.empty?).to be_true
+    end
+
+    context 'using fetch' do
+
+      it 'returns the value if a key is present' do
+        expect(hash.fetch(:a)).to eq 1234
+      end
+
+      it 'returns the supplied opts if the key is not found' do
+        expect(hash.fetch('z', 'gary')).to eq 'gary'
+      end
+
+      it 'returns a KeyError if the key is not found' do
+        expect{ hash.fetch(:wat) }.to raise_error(KeyError)
+      end
+    end
   end
 end
