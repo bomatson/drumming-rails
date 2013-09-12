@@ -177,5 +177,18 @@ describe Hash do
         expect(hashie.flatten).to eq [:a,[12,34], :b, 'gary']
       end
     end
+
+    context 'by reference' do
+
+      it 'uses has_key? to lookup a key' do
+        expect(hash.has_key?( :a )).to be_true
+        expect(hash.has_key?( 'a' )).to be_false
+      end
+
+      it 'uses has_value? to lookup a value' do
+        expect(hash.has_value?(1234)).to be_true
+        expect(hash.has_value?('something')).to be_false
+      end
+    end
   end
 end
