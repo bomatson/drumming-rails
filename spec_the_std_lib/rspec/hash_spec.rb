@@ -163,5 +163,19 @@ describe Hash do
         expect{ hash.fetch(:wat) }.to raise_error(KeyError)
       end
     end
+
+    context 'using flatten' do
+
+      let(:hashie) {{a: [12,34], b: 'gary'}}
+
+      it 'returns an array that is a one dimensional flattening of this hash' do
+        expect(hash.flatten).to eq [:a, 1234,:b, 'string']
+      end
+
+      it 'with an optional level argument to determine recursion' do
+        expect(hashie.flatten(2)).to eq [:a,12,34, :b, 'gary']
+        expect(hashie.flatten).to eq [:a,[12,34], :b, 'gary']
+      end
+    end
   end
 end
