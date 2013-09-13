@@ -116,6 +116,19 @@ describe Hash do
       ).to eq({a: 1234})
     end
 
+    it 'using replace with a hash as an argument to completely replace the hash' do
+      expect(hash.replace(mani)).to eq mani
+    end
+
+    it 'uses to_s to return the contents of the hash as a string' do
+      expect(hash.to_s).to eq "{:a=>1234, :b=>\"string\"}"
+      #aliased as inspect as well
+    end
+
+    it 'uses invert to create a new hash with the key-value pairs swapped' do
+      expect(hash.invert).to eq( {1234=>:a, 'string'=>:b} )
+    end
+
     context 'iterating' do
       let(:args) { [] }
 
@@ -142,11 +155,6 @@ describe Hash do
         hash.each_value {|value| args << value}
         args.should eq([1234, 'string'])
       end
-    end
-
-    it 'with empty? to see if the hash has no key-value pairs' do
-      expect(hash.empty?).to be_false
-      expect({}.empty?).to be_true
     end
 
     context 'using fetch' do
@@ -180,14 +188,27 @@ describe Hash do
 
     context 'by reference' do
 
-      it 'uses has_key? to lookup a key' do
+      it 'with empty? to see if the hash has no key-value pairs' do
+        expect(hash.empty?).to be_false
+        expect({}.empty?).to be_true
+      end
+
+      it 'uses has_key? to verify a key is present' do
         expect(hash.has_key?( :a )).to be_true
         expect(hash.has_key?( 'a' )).to be_false
       end
 
-      it 'uses has_value? to lookup a value' do
+      it 'uses has_value? to verify a value is present' do
         expect(hash.has_value?(1234)).to be_true
         expect(hash.has_value?('something')).to be_false
+      end
+
+      it 'uses include? to to verify a key is present' do
+        expect(hash.include?(:a)).to be_true
+      end
+
+      it 'cannot use include? to lookup a value' do
+        expect(hash.include?(1234)).to be_false
       end
     end
   end
