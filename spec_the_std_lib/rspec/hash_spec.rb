@@ -155,6 +155,16 @@ describe Hash do
         hash.each_value {|value| args << value}
         args.should eq([1234, 'string'])
       end
+
+      it 'with keep_if to delete every key-value pair which evals to false' do
+        expect(
+          hash.keep_if{ |key, value| key == :a }
+        ).to eq({a: 1234})
+      end
+
+      it 'with keep_if to return an enum if no block is given' do
+        expect(hash.keep_if).to be_kind_of Enumerator
+      end
     end
 
     context 'using fetch' do
@@ -209,6 +219,22 @@ describe Hash do
 
       it 'cannot use include? to lookup a value' do
         expect(hash.include?(1234)).to be_false
+      end
+
+      it 'uses key(value) to return occurrence of given value' do
+        expect(hash.key(1234)).to eq :a
+      end
+
+      it 'uses key(value) to return nil if value is not found' do
+        expect(hash.key('wat')).to be_nil
+      end
+
+      it 'uses keys to return an array of keys in the hash' do
+        expect(hash.keys).to eq [:a,:b]
+      end
+
+      it 'uses values to return an array of values in the hash' do
+        expect(hash.values).to eq [1234, 'string']
       end
     end
   end
