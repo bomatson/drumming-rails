@@ -129,6 +129,32 @@ describe Hash do
       expect(hash.invert).to eq( {1234=>:a, 'string'=>:b} )
     end
 
+    context 'given another hash' do
+      let(:other) { {c: 'new'} }
+      let(:dupe)  { {b: 'gary', c: 5678} }
+
+      it 'uses merge to combine the elements of two hashes' do
+        expect(hash.merge(other)).to eq( {a: 1234, b: 'string', c: 'new'})
+      end
+
+      it 'uses other hash to detemine value of duplicate keys with merge' do
+        expect(hash.merge(dupe)).to eq( {a: 1234, b: 'gary', c: 5678})
+      end
+
+      it 'uses block to determine value of duplicate keys if given with merge' do
+        expect(
+          hash.merge(dupe){ |key, old, new|
+          old + new
+          }
+        ).to eq( {a: 1234, b: 'stringgary', c: 5678} )
+      end
+
+      it 'uses merge! to change the key-values in the original hash' do
+        hash.merge!(other)
+        expect(hash).to eq( {a: 1234, b: 'string', c: 'new'} )
+      end
+    end
+
     context 'iterating' do
       let(:args) { [] }
 
@@ -208,6 +234,10 @@ describe Hash do
         expect(hash.has_key?( 'a' )).to be_false
       end
 
+      it 'uses member? as a synonym to has_key?' do
+        expect(hash.member?( :a )).to be_true
+      end
+
       it 'uses has_value? to verify a value is present' do
         expect(hash.has_value?(1234)).to be_true
         expect(hash.has_value?('something')).to be_false
@@ -235,6 +265,10 @@ describe Hash do
 
       it 'uses values to return an array of values in the hash' do
         expect(hash.values).to eq [1234, 'string']
+      end
+
+      it 'uses length to return the number of key value pairs' do
+        expect(hash.length).to eq 2
       end
     end
   end
