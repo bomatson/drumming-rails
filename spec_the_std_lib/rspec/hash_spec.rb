@@ -129,6 +129,18 @@ describe Hash do
       expect(hash.invert).to eq( {1234=>:a, 'string'=>:b} )
     end
 
+    context 'given an array as a key whose value is modified' do
+      it 'returns nil unless using rehash to rebuild the hash based on current values' do
+        #this is basically a way to reindex a hash if its values have changed
+        #I had trouble making this work with let and before block, it kept reindexing the value
+        a = [1,2]
+        h = { a => 1234, b: 'gary' }
+
+        expect(h[a]).to be_nil
+        h.rehash
+        expect(h[a]).to eq 1234
+      end
+    end
     context 'given another hash' do
       let(:other) { {c: 'new'} }
       let(:dupe)  { {b: 'gary', c: 5678} }
@@ -269,6 +281,18 @@ describe Hash do
 
       it 'uses length to return the number of key value pairs' do
         expect(hash.length).to eq 2
+      end
+
+      it 'uses rassoc to return the first key value pair matching that value' do
+        expect(hash.rassoc(1234)).to eq [:a, 1234]
+      end
+
+      it 'uses rassoc to return an array if a value match is found' do
+        expect(hash.rassoc(1234)).to be_kind_of Array
+      end
+
+      it 'uses rassoc to return nil if no value match is found' do
+        expect(hash.rassoc(124)).to be_nil
       end
     end
   end
