@@ -136,11 +136,14 @@ describe Hash do
         a = [1,2]
         h = { a => 1234, b: 'gary' }
 
+        a[0] = 45
+
         expect(h[a]).to be_nil
         h.rehash
         expect(h[a]).to eq 1234
       end
     end
+
     context 'given another hash' do
       let(:other) { {c: 'new'} }
       let(:dupe)  { {b: 'gary', c: 5678} }
@@ -203,6 +206,22 @@ describe Hash do
       it 'with keep_if to return an enum if no block is given' do
         expect(hash.keep_if).to be_kind_of Enumerator
       end
+
+      it 'with reject to remove elements in a hash if they match logic in the block' do
+        expect(
+          hash.reject{ |key| key == :b}
+        ).to eq({a: 1234})
+        #unlike delete_if, this iterator returns a copy of the hash
+
+        expect(hash).to eq({a: 1234, b: 'string'})
+      end
+
+      it 'with reject! to return nil if no change were made' do
+        expect(
+          hash.reject!{ |key| key == :c}
+        ).to be_nil
+      end
+
     end
 
     context 'using fetch' do
