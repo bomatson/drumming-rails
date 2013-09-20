@@ -103,6 +103,15 @@ describe Hash do
       expect(hash.delete(:z)).to be_nil
     end
 
+    it 'with shift to remove first  k-v pair' do
+      hash.shift
+      expect(hash).to eq({ b: 'string'})
+    end
+
+    it 'with shift to return an array of the first key value pair' do
+      expect(hash.shift).to eq([:a, 1234])
+    end
+
     it 'with compare_by_identity to reference objects in hash using object_ids' do
       # note that symbols have the same object_id, so they are unaffected
       # the hash evaluates reference using equal? instead of eql?
@@ -222,6 +231,33 @@ describe Hash do
         ).to be_nil
       end
 
+      it 'with select to return a new hash for which the block returns true' do
+        #similar to keep_if except it returns a new hash instead of changing existing one
+        expect(
+          hash.select{ |k,v| k == :a }
+        ).to eq({ a: 1234 })
+
+        expect(hash).to include b: 'string'
+      end
+
+      it 'with select returning an Enum if no block is given' do
+        expect(hash.select).to be_kind_of Enumerator
+      end
+
+      it 'with select! to return existing hash for which the block returns true' do
+        expect(
+          hash.select!{ |k,v| k == :a }
+        ).to eq({ a: 1234 })
+
+        expect(hash).to_not include b: 'string'
+      end
+      it 'with select! to return nil if no changes were made' do
+        #important to note that select will return an empty hash, even if no values return true.
+        #Nil is only returned if no comparison is made
+        expect(
+          hash.select!{ |k,v| k }
+        ).to be_nil
+      end
     end
 
     context 'using fetch' do
