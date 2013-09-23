@@ -94,6 +94,14 @@ describe Hash do
       expect(hash.clear).to be_empty
     end
 
+    it 'with to_a to return an array' do
+      expect(hash.to_a).to be_kind_of Array
+    end
+
+    it 'with to_a to return each key value pair in a nested array' do
+      expect(hash.to_a).to eq [[:a, 1234], [:b, 'string']]
+    end
+
     it 'with delete to remove an element by its key' do
       hash.delete(:a)
       expect(hash).to_not include 1234
@@ -103,7 +111,7 @@ describe Hash do
       expect(hash.delete(:z)).to be_nil
     end
 
-    it 'with shift to remove first  k-v pair' do
+    it 'with shift to remove first k-v pair' do
       hash.shift
       expect(hash).to eq({ b: 'string'})
     end
