@@ -185,6 +185,11 @@ describe Hash do
         hash.merge!(other)
         expect(hash).to eq( {a: 1234, b: 'string', c: 'new'} )
       end
+
+      it 'uses update as an alias to merge!' do
+        hash.update(other)
+        expect(hash).to eq( {a: 1234, b: 'string', c: 'new'} )
+      end
     end
 
     context 'iterating' do
@@ -318,6 +323,11 @@ describe Hash do
         expect(hash.has_value?('something')).to be_false
       end
 
+      it 'uses value? as an alias to has_value?' do
+        expect(hash.value?(1234)).to be_true
+        expect(hash.value?('something')).to be_false
+      end
+
       it 'uses include? to to verify a key is present' do
         expect(hash.include?(:a)).to be_true
       end
@@ -340,6 +350,10 @@ describe Hash do
 
       it 'uses values to return an array of values in the hash' do
         expect(hash.values).to eq [1234, 'string']
+      end
+
+      it 'uses values_at to return an array of values for the given keys' do
+        expect(hash.values_at(:a)).to eq [1234]
       end
 
       it 'uses length to return the number of key value pairs' do
