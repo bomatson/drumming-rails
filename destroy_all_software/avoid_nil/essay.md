@@ -14,18 +14,18 @@ Introduction of the nil is not local to the use of the nil in the traceback
 ## A solution
 He solves this by using:
 ```ruby
-  people.fetch(id)
+people.fetch(id)
 ```
 Instead of
 ```ruby
-  people[id]
+people[id]
 ```
 Rails gets this right when finding by id, but not when finding by slug (or other dynamic finder) unless using !
 
 ## Other ways to avoid the nil
 - Depending on your domain model, it may be better to switch where you define the model relationship
 
-example: put attr_reader :person on Subscribe model rather than other way around.
+    example: put attr_reader :person on Subscribe model rather than other way around.
 
 - Instead of using attr_reader, you can roll you're own:
 ```ruby
@@ -40,12 +40,14 @@ class Person
     @subscription or raise NoSubscriptionError
   end
 end
-
+```
+```ruby
 class NoSubscriptionError < Exception
 end
 ```
 
-Localizing is not ideal, since we mainly just don't want it to fail
+    Localizing is not ideal, since we mainly just don't want it to fail
+
 - Return a new type of person (Subscriber) as a separate class that gets a subscription instead of mutating Person with subscription
   - Please see example.rb for this example
 
