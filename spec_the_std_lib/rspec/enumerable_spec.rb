@@ -54,6 +54,36 @@ describe Enumerable do
           ).to eq( [[:_alone, ['ant']], [:_alone, ['true']], [false, ['fragrance', 'banana']]])
         end
       end
+
+      context 'where an iteration expects to return an array' do
+
+        it 'collect with a block modifies each item in the collection' do
+          expect(
+            collection.collect{ |word| word.to_sym }
+          ).to eq([:ant, :true, :fragrance, :banana])
+        end
+
+        it 'collect passed a range will only affect those items' do
+          expect(
+            collection[0..1].collect{ |word| word.to_sym }
+          ).to eq([:ant, :true])
+        end
+
+        it 'collect returns a new array' do
+          new = collection.collect{ |word| word.to_sym }
+          expect(new).to_not eq collection
+        end
+
+        context 'given an array of arrays' do
+          let(:new_array) { [[1,2,],[3,4]] }
+
+          it 'uses collect_concat / flat_map to return concatenated results of running block once for each item' do
+            expect(
+              new_array.flat_map { |number| number << 'new' }
+            ).to eq([1,2,'new',3,4,'new'])
+          end
+        end
+      end
     end
   end
 end
