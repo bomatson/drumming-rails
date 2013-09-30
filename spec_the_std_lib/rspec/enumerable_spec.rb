@@ -33,7 +33,6 @@ describe Enumerable do
       end
 
       context 'where an iteration expects to return an enumerator' do
-        let(:numbers) { [1,2,3,4,5,6] }
 
         it 'chunk will return enumeration if given a block' do
           expect(
@@ -46,6 +45,13 @@ describe Enumerable do
             collection.chunk{ |string | string.include?('t') }
          .select { |result| result }
           ).to eq([[true, ['ant', 'true']], [false, ['fragrance', 'banana']]])
+        end
+
+        it 'with chunk using :_alone symbol to force items into their own grouping' do
+          expect(
+            collection.chunk{ |string | string.include?('t') ? :_alone : false }
+         .select { |result| result }
+          ).to eq( [[:_alone, ['ant']], [:_alone, ['true']], [false, ['fragrance', 'banana']]])
         end
       end
     end
