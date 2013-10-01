@@ -61,4 +61,59 @@ From there, it is recommended to have some authentication around this web interf
 
 # Sidekiq
 
-## ...Coming Soon!
+## Implementation
+Using the same example as above running on Redis, Ryan creates a worker directory within the Rails app and provides a `PygmentsWorker` class:
+
+```
+class PygmentsWorker
+  include Sidekiq::Worker
+
+  def perform(snippet_id)
+    snippet  = Snippet.find(snippet_id)
+    ... code that does syntax highlighting using the snippet object ...
+  end
+end
+```
+
+Within your SnippetsController, you should include:
+
+```
+if @snippet.save
+  PygmentWorker.perform_async(@snippet.id)
+```
+From the CLI, you can boot up the Sidekiq queue by running `sidekiq`
+
+Keep in mind, it will auto retry if there is an error. If an exception is raised, take a look at side effects. To disable, include `sidekiq_options retry: false`
+
+Also,  you'll need be threadsafe for code you use with the worker. Avoid sharing data which is muttable between instances. 
+
+One more thing, you'll probably want to increase your pool size on development and prod (see database.yml)
+
+## Cool Features
+It is simple top schedule workers for time other than now:
+
+```
+if @snippet.save
+  PygmentWorker.perform_in(1.hour, @snippet.id)
+```
+
+You can also prioritize queues, by setting `sidekiq_options queue: 'high'` in the PygmentWorker class
+Then, from the CLI run `sidekiq -q high, 5 default` and the high queue will take priority
+Re: monitoring, the setup is the same as Rescue, where you add this to your routes file:
+
+```
+require 'sidekiq/web'
+
+...
+mount Sidekiq::Web, at: '/sidekiq'
+```
+
+Also, you need to add sinatra and slim to your Gemfile in order to access the web interface
+
+## Benefits
+* Sidekiq handles multiple jobs concurrently using threads instead of processes, which can save on memory.
+* Easy to understand ExceptionHandling for retries
+* Includes Celluloid for concurrency in Ruby
+
+## Cons
+* You need to ensure your code is threadsafe, and multithreading can open a whole can of worms.
