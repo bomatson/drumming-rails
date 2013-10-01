@@ -84,6 +84,22 @@ describe Enumerable do
           end
         end
       end
+
+      context 'where an iteration expects to return an integer' do
+
+        it 'uses count to return number of items in enum through enumeration' do
+          expect(collection.count).to eq 4
+        end
+
+        it 'uses count with an arg to return number of items in enum equal to arg' do
+          expect(collection.count('ant')).to eq 1
+        end
+
+        it 'uses count with a block to count number of item yielding true value' do
+          expect(
+            collection.count{ |x| x.include?('t') }).to eq 2
+        end
+      end
     end
   end
 end
