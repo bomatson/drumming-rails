@@ -2,6 +2,7 @@ describe Enumerable do
   describe 'public #instance methods' do
     context 'given a collection' do
       let(:collection) { ['ant', 'truth', 'fragrance', 'banana'] }
+      let(:numbers)    { [ 1, 2, 3, 4, 5 ] }
 
       context 'where an iteration expects a boolean return value' do
 
@@ -72,6 +73,24 @@ describe Enumerable do
         it 'collect returns a new array' do
           new = collection.collect{ |word| word.to_sym }
           expect(new).to_not eq collection
+        end
+
+        it 'drop moves first n elements in enum to return same array' do
+          expect(collection.drop(1)).to eq(['truth', 'fragrance', 'banana'])
+        end
+
+        it 'drop_while remove n items up to the first element for which the block evals to false' do
+          expect(
+            numbers.drop_while{ |i| i < 3 }
+          ).to eq [ 3, 4, 5 ]
+        end
+
+        it 'each_cons iteates over the block for each array of consecutive n elements' do
+          consecutive = []
+          collection.each_cons(3) do |words|
+            consecutive << words
+          end
+          expect(consecutive).to eq([['ant', 'truth', 'fragrance'], ['truth', 'fragrance', 'banana']])
         end
 
         context 'given an array of arrays' do
