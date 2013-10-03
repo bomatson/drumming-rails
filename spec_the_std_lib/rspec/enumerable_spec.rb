@@ -85,12 +85,20 @@ describe Enumerable do
           ).to eq [ 3, 4, 5 ]
         end
 
-        it 'each_cons iteates over the block for each array of consecutive n elements' do
+        it 'each_cons iterates over the block for each array of consecutive n elements' do
           consecutive = []
           collection.each_cons(3) do |words|
             consecutive << words
           end
           expect(consecutive).to eq([['ant', 'truth', 'fragrance'], ['truth', 'fragrance', 'banana']])
+        end
+
+        it 'each_slice iterates over the block for each slice of n elements' do
+          slices = []
+          numbers.each_slice(2) do |nums|
+            slices << nums
+          end
+          expect(slices).to eq([[1,2,],[3,4],[5]])
         end
 
         context 'given an array of arrays' do
