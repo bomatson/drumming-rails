@@ -101,6 +101,12 @@ describe Enumerable do
           expect(slices).to eq([[1,2,],[3,4],[5]])
         end
 
+        it 'each_with_index to access the each elements index' do
+          indexes = []
+          collection.each_with_index{ |str, idx| indexes << idx }
+          expect(indexes).to eq([0,1,2,3])
+        end
+
         context 'given an array of arrays' do
           let(:new_array) { [[1,2,],[3,4]] }
 
