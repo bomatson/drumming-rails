@@ -107,6 +107,18 @@ describe Enumerable do
           expect(indexes).to eq([0,1,2,3])
         end
 
+        it 'entries returns an array of items in enum' do
+          expect(
+            {a: 'new', b: 'old'}.entries
+          ).to eq [[:a, 'new'], [:b, 'old']]
+        end
+
+        it 'find_all recovers all the elem for which a block is true as an array' do
+          expect(
+            numbers.find_all{ |num| num % 2 == 0 }
+          ).to eq [2,4]
+        end
+
         context 'given an array of arrays' do
           let(:new_array) { [[1,2,],[3,4]] }
 
@@ -134,7 +146,7 @@ describe Enumerable do
         end
       end
 
-      context 'where an iteration expects to return an integer' do
+      context 'where an iteration expects to return nil' do
 
         it 'cycle calls block for each element in enum n times' do
           # I could see this being useful if you need to iterate over each element more than once
@@ -164,6 +176,19 @@ describe Enumerable do
           expect(
             collection.detect(ifnone = proc {:foo}){ |str| str.include?('z') }
           ).to eq :foo
+        end
+
+        it 'find behaves the exact same way as detect' do
+          expect(
+            collection.find{ |str| str.include?('r') }
+          ).to eq 'truth'
+        end
+
+        it 'each_with_object iterates with an arbitrary obj given, returns initally given object' do
+          something = collection.each_with_object([]) do |elem, obj|
+            obj << (elem + "poo")
+          end
+          expect(something).to eq ["antpoo", "truthpoo", "fragrancepoo", "bananapoo"]
         end
       end
     end
