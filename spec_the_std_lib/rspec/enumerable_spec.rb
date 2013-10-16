@@ -119,6 +119,20 @@ describe Enumerable do
           ).to eq [2,4]
         end
 
+        it 'grep grabs every elem in enum where the pattern exactly matches' do
+          expect(numbers.grep(1..3)).to eq([1,2,3])
+        end
+
+        it 'grep grabs every elem in enum where the pattern exactly matches with regex' do
+          expect(collection.grep(/h$/)).to eq(['truth'])
+        end
+
+        it 'grep with a block passes each matching elem to the block and storing each result in arr' do
+          expect(
+            numbers.grep(1..3) { |n| n >= 2 }
+          ).to eq([false, true, true])
+        end
+
         context 'given an array of arrays' do
           let(:new_array) { [[1,2,],[3,4]] }
 
@@ -143,6 +157,16 @@ describe Enumerable do
         it 'uses count with a block to count number of item yielding true value' do
           expect(
             collection.count{ |x| x.include?('t') }).to eq 2
+        end
+
+        it 'uses find_index to compare entry in enum with given value, returning the index' do
+          expect(collection.find_index('fragrance')).to eq 2
+        end
+
+        it 'uses find_index with block to return index for FIRST enum entry which evals to true' do
+          expect(
+            collection.find_index { |str| str.include?('r') }
+          ).to eq 1
         end
       end
 
@@ -189,6 +213,14 @@ describe Enumerable do
             obj << (elem + "poo")
           end
           expect(something).to eq ["antpoo", "truthpoo", "fragrancepoo", "bananapoo"]
+        end
+
+        it 'uses first to return the first element' do
+          expect(collection.first).to eq 'ant'
+        end
+
+        it 'uses first with an arg to return initial n elements' do
+          expect(collection.first(2)).to eq ['ant', 'truth']
         end
       end
     end
