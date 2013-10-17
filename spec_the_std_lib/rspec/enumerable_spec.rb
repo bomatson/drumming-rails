@@ -31,6 +31,10 @@ describe Enumerable do
             collection.any? { |word| word.length == 3 }
           ).to eq true
         end
+
+        it 'include? returns true if any elem in enum equals obj' do
+          expect(collection.include?('fragrance')).to be_true
+        end
       end
 
       context 'where an iteration expects to return an enumerator' do
@@ -179,6 +183,15 @@ describe Enumerable do
           expect(
             collection.cycle(2){ |x| x }
           ).to be_nil
+        end
+      end
+
+      context 'where an iteration expects to return a hash' do
+        it 'group_by groups collection by the result of the block' do
+          #keys are the evaluated result and the values are an array of elem that correspond to the result
+          expect(
+            numbers.group_by{|num| num % 2 }
+          ).to eq({1=>[1, 3, 5], 0=>[2, 4]})
         end
       end
 
