@@ -1,4 +1,4 @@
-require_relative 'build_enumerable'
+require_relative 'bonumerable'
 
 class SortedList
   include Bonumerable
@@ -42,6 +42,12 @@ describe 'Bonumerable' do
 
   it 'supports select' do
     @list.select { |x| x.even? }.must_equal([2,28])
+  end
+
+  it 'supports reduce' do
+    @list.reduce { |initial, new| initial + new }.must_equal(126)
+    @list.reduce(-10) { |initial, new| initial + new }.must_equal(116)
+    @list.reduce(:+).must_equal(126)
   end
 end
 
