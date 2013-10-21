@@ -1,9 +1,11 @@
 module Bonumerable
 
   def map
-    result = []
-    each { |i| result << yield(i) }
-    result
+    if block_given?
+      [].tap{ |out| each { |e| out << yield(e) } }
+    else
+      Bonumerator.new(self, :map)
+    end
   end
 
   def sort_by
@@ -11,9 +13,7 @@ module Bonumerable
   end
 
   def select
-    result = []
-    each { |i| result << i if yield(i) }
-    result
+    [].tap{ |out| each { |i| out << i if yield(i) } }
   end
 
   def reduce(operation_or_value=nil)
