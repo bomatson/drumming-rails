@@ -235,6 +235,24 @@ describe Enumerable do
         it 'uses first with an arg to return initial n elements' do
           expect(collection.first(2)).to eq ['ant', 'truth']
         end
+
+        context 'with inject / reduce' do
+          it 'performs a binary operation on each elem from given block' do
+            expect(
+              numbers.inject {|sum, n| sum + n }
+            ).to eq 15
+          end
+
+          it 'if a symbol is specified, each elem is passed to given method' do
+            expect(numbers.reduce(:-)).to eq -13
+          end
+
+          it 'will perform with an initial value' do
+            expect(
+              numbers.reduce(3, :+)
+            ).to eq 18
+          end
+        end
       end
     end
   end
