@@ -35,6 +35,10 @@ describe Enumerable do
         it 'include? returns true if any elem in enum equals obj' do
           expect(collection.include?('fragrance')).to be_true
         end
+
+        it 'member? is a synonym to include?' do
+          expect(collection.member?('fragrance')).to be_true
+        end
       end
 
       context 'where an iteration expects to return an enumerator' do
@@ -254,21 +258,62 @@ describe Enumerable do
           end
         end
 
-        it 'max returns the maximum value assuming all objs implement Comparable' do
-          expect(collection.max).to eq 'truth'
-          expect(numbers.max).to eq 5
-        end
+        context 'max & min,' do
+          before do
+            collection.shift
+            collection << 'antwerp'
+          end
 
-        it 'max returns the maximum value based on the result of the given block' do
-          expect(
-           collection.max{ |a, b| a.length <=> b.length }
-          ).to eq 'fragrance'
-        end
+          it 'max returns the maximum value assuming all objs implement Comparable' do
+            expect(collection.max).to eq 'truth'
+            expect(numbers.max).to eq 5
+          end
 
-        it 'max_by returns the obj that gives the max value from the block' do
-          expect(
-            collection.max_by{ |x| x.length }
-          ).to 'fragrance'
+          it 'max returns the maximum value based on the result of the given block' do
+            expect(
+              collection.max{ |a, b| a.length <=> b.length }
+            ).to eq 'fragrance'
+          end
+
+          it 'max_by returns the obj that gives the max value from the block' do
+            expect(
+              collection.max_by{ |x| x.length }
+            ).to eq 'fragrance'
+          end
+
+          it 'min returns the minimum value assuming the objs use Comparable' do
+            expect(collection.min).to eq 'antwerp'
+            expect(numbers.min).to eq 1
+          end
+
+          it 'min returns the minimum value based on the result of the given block' do
+            expect(
+              collection.min{ |a, b| a.length <=> b.length }
+            ).to eq 'truth'
+          end
+
+          it 'max_by returns the obj that gives the max value from the block' do
+            expect(
+              collection.min_by{ |x| x.length }
+            ).to eq 'truth'
+          end
+
+          it 'minmax returns the maximum & minimum value assuming all objs implement Comparable' do
+            expect(collection.minmax).to eq ['antwerp', 'truth']
+            expect(numbers.minmax).to eq [1,5]
+          end
+
+          it 'minmax returns the max and minimum value based on the result of the given block' do
+            expect(
+              collection.minmax{ |a, b| a.length <=> b.length }
+            ).to eq ['truth', 'fragrance']
+          end
+
+          it 'minmax_by returns the objs that gives the max & min value from the block' do
+            expect(
+              collection.minmax_by{ |x| x.length }
+            ).to eq ['truth', 'fragrance']
+          end
         end
       end
     end
