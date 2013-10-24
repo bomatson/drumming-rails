@@ -62,7 +62,7 @@ describe Enumerable do
 
       context 'where an iteration expects to return an array' do
 
-        it 'collect with a block modifies each item in the collection' do
+        it 'collect / map with a block modifies each item in the collection' do
           expect(
             collection.collect{ |word| word.to_sym }
           ).to eq([:ant, :truth, :fragrance, :banana])
@@ -252,6 +252,23 @@ describe Enumerable do
               numbers.reduce(3, :+)
             ).to eq 18
           end
+        end
+
+        it 'max returns the maximum value assuming all objs implement Comparable' do
+          expect(collection.max).to eq 'truth'
+          expect(numbers.max).to eq 5
+        end
+
+        it 'max returns the maximum value based on the result of the given block' do
+          expect(
+           collection.max{ |a, b| a.length <=> b.length }
+          ).to eq 'fragrance'
+        end
+
+        it 'max_by returns the obj that gives the max value from the block' do
+          expect(
+            collection.max_by{ |x| x.length }
+          ).to 'fragrance'
         end
       end
     end
