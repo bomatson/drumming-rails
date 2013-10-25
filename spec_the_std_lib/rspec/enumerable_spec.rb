@@ -1,8 +1,9 @@
 describe Enumerable do
   describe 'public #instance methods' do
     context 'given a collection' do
-      let(:collection) { ['ant', 'truth', 'fragrance', 'banana'] }
-      let(:numbers)    { [ 1, 2, 3, 4, 5 ] }
+      let(:collection)        { ['ant', 'truth', 'fragrance', 'banana'] }
+      let(:numbers)           { [ 1, 2, 3, 4, 5 ] }
+      let(:booleans_array)    { [true, false, nil] }
 
       context 'where an iteration expects a boolean return value' do
 
@@ -38,6 +39,28 @@ describe Enumerable do
 
         it 'member? is a synonym to include?' do
           expect(collection.member?('fragrance')).to be_true
+        end
+
+        it 'none? returns true if the block never returns true for each elem' do
+          expect(
+            collection.none? { |word| word.length > 9 }
+          ).to be_true
+        end
+
+        it 'none? without a block returns false if any of the collection members are true' do
+          expect(collection.none?).to be_false
+          expect(numbers.none?).to be_false
+        end
+
+        it 'one? returns true if the block returns true ONLY ONCE' do
+          expect(
+            collection.one? { |word| word.length > 8 }
+          ).to be_true
+        end
+
+        it 'one? without a block returns true if exactly one of the collection members are true' do
+          expect(booleans_array.one?).to be_true
+          expect(collection.one?).to be_false
         end
       end
 
