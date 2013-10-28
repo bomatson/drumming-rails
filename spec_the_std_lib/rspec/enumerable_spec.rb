@@ -132,7 +132,7 @@ describe Enumerable do
           expect(slices).to eq([[1,2,],[3,4],[5]])
         end
 
-        it 'each_with_index to access the each elements index' do
+        it 'each_with_index to access each elements index' do
           indexes = []
           collection.each_with_index{ |str, idx| indexes << idx }
           expect(indexes).to eq([0,1,2,3])
@@ -144,7 +144,7 @@ describe Enumerable do
           ).to eq [[:a, 'new'], [:b, 'old']]
         end
 
-        it 'find_all recovers all the elem for which a block is true as an array' do
+        it 'find_all / select recovers all the elem for which a block is true as an array' do
           expect(
             numbers.find_all{ |num| num % 2 == 0 }
           ).to eq [2,4]
@@ -162,6 +162,18 @@ describe Enumerable do
           expect(
             numbers.grep(1..3) { |n| n >= 2 }
           ).to eq([false, true, true])
+        end
+
+        it 'partition returns two arrays, the first containing elems for which the block evals to true' do
+          expect(
+            numbers.partition{ |x| x.even? }
+          ).to eq([[2,4],[1,3,5]])
+        end
+
+        it 'reject returns an array for all elements of enum for which the given block is false' do
+          expect(
+            numbers.reject{ |x| x.even? }
+          ).to eq([1,3,5])
         end
 
         context 'given an array of arrays' do
@@ -261,6 +273,12 @@ describe Enumerable do
 
         it 'uses first with an arg to return initial n elements' do
           expect(collection.first(2)).to eq ['ant', 'truth']
+        end
+
+        it 'uses reverse_each to traverse an array in reverse order' do
+          expect(
+            [].tap{ |out| numbers.reverse_each { |x| out << (x + x)}}
+          ).to eq [10,8,6,4,2]
         end
 
         context 'with inject / reduce' do
