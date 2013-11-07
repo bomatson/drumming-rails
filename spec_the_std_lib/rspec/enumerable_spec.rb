@@ -4,6 +4,7 @@ describe Enumerable do
       let(:collection)        { ['ant', 'truth', 'fragrance', 'banana'] }
       let(:numbers)           { [ 1, 2, 3, 4, 5 ] }
       let(:booleans_array)    { [true, false, nil] }
+      let(:hash)              { {a: 'gary', b: 'fairy'} }
 
       context 'where an iteration expects a boolean return value' do
 
@@ -174,6 +175,34 @@ describe Enumerable do
           expect(
             numbers.reject{ |x| x.even? }
           ).to eq([1,3,5])
+        end
+
+        it 'sort will return an array of numbers sorted by value' do
+          expect(numbers.sort).to eq [1,2,3,4,5]
+        end
+
+        it 'sort will return an array of strings sorted by <=>' do
+          expect(collection.sort).to eq ['ant', 'banana', 'fragrance', 'truth']
+        end
+
+        it 'sort_by uses Schwartzian Transform to sort the collection with a given method' do
+          expect(
+            collection.sort_by(&:length)
+          ).to eq ['ant', 'truth', 'banana', 'fragrance']
+        end
+
+        it 'take will return first n elements from enum' do
+          expect(collection.take(1)).to eq ['ant']
+        end
+
+        it 'take_while retrieves the values until the block evaluates to false or nil' do
+          expect(
+            numbers.take_while { |i| i <= 3 }
+          ).to eq [1,2,3]
+        end
+
+        it 'to_a returns an array containing items in enum' do
+          expect(hash.to_a).to eq [[:a, 'gary'], [:b, 'fairy']]
         end
 
         context 'given an array of arrays' do
