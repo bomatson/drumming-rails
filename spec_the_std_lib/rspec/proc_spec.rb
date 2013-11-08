@@ -16,7 +16,14 @@ describe Proc do
   end
 
   describe 'public instance methods' do
+    let(:my_proc) { Proc.new { |x| x < 3 } }
+
     it '=== invokes the block with object as proc\'s parameter like call' do
+      expect( my_proc === 4 ).to be_false
+    end
+
+    it '[] invokes the block with params' do
+      expect( my_proc[1,2] ).to be_true
     end
   end
 end
