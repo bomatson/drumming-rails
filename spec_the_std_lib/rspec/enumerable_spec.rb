@@ -205,6 +205,11 @@ describe Enumerable do
           expect(hash.to_a).to eq [[:a, 'gary'], [:b, 'fairy']]
         end
 
+        it 'zip takes one item from enum and merges the corresponding elem from args' do
+          expect(collection.zip(numbers, booleans_array))
+            .to eq [['ant', 1, true], ["truth", 2, false], ["fragrance", 3, nil], ["banana", 4, nil]]
+        end
+
         context 'given an array of arrays' do
           let(:new_array) { [[1,2,],[3,4]] }
 
