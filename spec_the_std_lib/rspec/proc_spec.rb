@@ -86,6 +86,9 @@ describe Proc do
 
     context 'error handling compared to lambdas' do
       let(:lambda_with_many_args) { lambda {|x,y, z| (x||0) + (y||0) + (z||0)} }
+      def n(&b)
+        b.lambda?
+      end
 
       it '#lambda? returns true for a Proc object for which arg handling is rigid' do
         expect(lambda_proc.lambda?).to be_true
@@ -113,6 +116,21 @@ describe Proc do
 
       it 'lambda raises an error if trying to expand an array with too few args' do
         expect{ lambda_with_many_args[ [1,2] ] }.to raise_error(ArgumentError)
+      end
+
+      it 'proc generated with the & argument acts like a Proc object' do
+        expect( n {}).to be_false
+      end
+
+      it 'preserves behavior of lambda if given by & object' do
+        expect(
+          n(&lambda {})
+        ).to be_true
+      end
+
+      it 'proc object converted from a method is treated as a lambda' do
+        def m() ; end
+        expect(method(:m).to_proc.lambda?).to be_true
       end
     end
   end
