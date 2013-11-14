@@ -84,6 +84,14 @@ describe Proc do
       expect(my_proc.inspect).to include 'proc_spec.rb:19'
     end
 
+    it '#parameters returns the parameter information of a proc' do
+      expect(proc_with_opts.parameters).to eq [[:opt, :a], [:rest, :b]]
+    end
+
+    it '#parameters returns the parameter information of a lambda with req args' do
+      expect(lambda_proc.parameters).to eq [[:req, :x]]
+    end
+
     context 'error handling compared to lambdas' do
       let(:lambda_with_many_args) { lambda {|x,y, z| (x||0) + (y||0) + (z||0)} }
       def n(&b)
