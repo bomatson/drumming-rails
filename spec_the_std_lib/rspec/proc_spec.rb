@@ -92,6 +92,15 @@ describe Proc do
       expect(lambda_proc.parameters).to eq [[:req, :x]]
     end
 
+    it '#source_location returns the source filename and line number of the proc' do
+      expect(my_proc.source_location)
+        .to eq ["/Users/bobbymatson/Projects/drumming-rails/spec_the_std_lib/rspec/proc_spec.rb", 19]
+    end
+
+    it '#to_proc will return instance of itself' do
+      expect(my_proc.to_proc).to be my_proc
+    end
+
     context 'error handling compared to lambdas' do
       let(:lambda_with_many_args) { lambda {|x,y, z| (x||0) + (y||0) + (z||0)} }
       def n(&b)
