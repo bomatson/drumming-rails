@@ -70,5 +70,23 @@ describe Struct do
       folk[0] = 'sandy'
       expect(folk.name).to eq 'sandy'
     end
+
+    it '#each calls the block for each instance variable' do
+      expect(
+        [].tap { |out| folk.each {|x| out << x} }
+      ).to eq ['bob']
+    end
+
+    it '#each with a block returns the struct' do
+      expect(
+        folk.each {}
+      ).to be_kind_of Struct
+    end
+
+    it '#each without a block returns an enumerator' do
+      expect(
+        folk.each
+      ).to be_kind_of Enumerator
+    end
   end
 end
