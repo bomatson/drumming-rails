@@ -109,12 +109,22 @@ describe Struct do
       expect(folk.inspect).to eq "#<struct Folk name=\"bob\">"
     end
 
-    it '#length provides the number of instance variables' do
+    it '#length / #size provides the number of instance variables' do
       expect(folk.length).to eq 1
     end
 
     it '#members returns an array of instance variable names' do
       expect(folk.members).to eq [:name]
+    end
+
+    it '#select, for each elem in struct, returns array where invoked block returns true' do
+      expect(
+        folk.select { |x| x.include?('b') }
+      ).to eq ['bob']
+    end
+
+    it '#to_a returns values for the instance in array' do
+      expect(folk.to_a).to eq ['bob']
     end
   end
 end
