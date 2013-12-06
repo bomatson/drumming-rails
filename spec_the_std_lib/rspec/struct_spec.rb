@@ -88,5 +88,33 @@ describe Struct do
         folk.each
       ).to be_kind_of Enumerator
     end
+
+    it '#each_pair calls the block, passing the name and value as params' do
+      expect(
+        [].tap { |out| folk.each_pair { |name, value| out << [name, value] } }
+      ).to eq [[:name, 'bob']]
+    end
+
+    it '#eql? is eqivalent to ==' do
+      expect(
+        folk.eql? Folk.new('bob')
+      ).to be_true
+    end
+
+    it '#hash returns a unique hash value as an integer' do
+      expect(folk.hash).to be_kind_of Integer
+    end
+
+    it '#inspect / to_s describes the contents of the struct in a string' do
+      expect(folk.inspect).to eq "#<struct Folk name=\"bob\">"
+    end
+
+    it '#length provides the number of instance variables' do
+      expect(folk.length).to eq 1
+    end
+
+    it '#members returns an array of instance variable names' do
+      expect(folk.members).to eq [:name]
+    end
   end
 end
