@@ -126,5 +126,21 @@ describe Struct do
     it '#to_a returns values for the instance in array' do
       expect(folk.to_a).to eq ['bob']
     end
+
+    it '#to_h returns instance vars as keys and values as hash' do
+      expect(folk.to_h).to eq({name: 'bob'})
+    end
+
+    it '#values will return the values for this instance in an array' do
+      expect(folk.values).to eq ['bob']
+    end
+
+    it '#values_at with an index returns an array of values at that position' do
+      expect(folk.values_at(0)).to eq ['bob']
+    end
+
+    it '#values_at with a range returns an array of values at those positions' do
+      expect(folk.values_at(0..3)).to eq ['bob', nil, nil, nil]
+    end
   end
 end
