@@ -46,15 +46,15 @@ describe 'String Test' do
   end
 
   it 'should recognize an element reference with an index' do
-    string[0].should eq("T") 
+    string[0].should eq("T")
   end
 
   it 'should find an element reference with a range' do
-    string[0..4].should eq("This ") 
+    string[0..4].should eq("This ")
   end
 
   it 'should find an element reference with a string' do
-    string['test'].should eq("test") 
+    string['test'].should eq("test")
   end
 
   it 'should properly use the capitalize method' do
@@ -126,7 +126,7 @@ describe 'String Test' do
   it 'will partition the string' do
     string.partition("my").should eq(["This is ", "my", " test"])
   end
-  
+
   it 'will partition the string with regex' do
     string.partition(/my/).should eq(["This is ", "my", " test"])
   end
@@ -236,14 +236,14 @@ describe 'String Test' do
   end
 
   it 'will use upto to iterate through successive values of two strings in an array' do
-    "a".upto("c").to_a.should eq(["a", "b", "c"]) 
+    "a".upto("c").to_a.should eq(["a", "b", "c"])
   end
 
   it 'will use upto to create an enumerator' do
-    "1".upto("3").should be_a(Enumerator)  
+    "1".upto("3").should be_a(Enumerator)
   end
 
   it 'will use up to to iterate through successive string values, including integers' do
-    "1".upto("3").to_a.should eq(["1", "2", "3"])   
+    "1".upto("3").to_a.should eq(["1", "2", "3"])
   end
 end
