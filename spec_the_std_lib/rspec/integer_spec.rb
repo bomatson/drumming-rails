@@ -28,5 +28,21 @@ describe Integer do
     it '#downto without a block returns an enumerator' do
       expect(5.downto(2)).to be_kind_of Enumerator
     end
+
+    it '#even? returns true if int is even' do
+      expect(6.even?).to be_true
+    end
+
+    it '#floor returns the receiver as int is already Integer' do
+      expect(5.floor).to eq 5
+    end
+
+    it '#gcd with another int provides greatest common divisor' do
+      expect(6.gcd(18)).to eq 6
+    end
+
+    it '#gcdlcm provides array with [gcd, least common multiple]' do
+      expect(6.gcdlcm(18)).to eq [6, 18]
+    end
   end
 end
