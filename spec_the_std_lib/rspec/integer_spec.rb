@@ -44,5 +44,29 @@ describe Integer do
     it '#gcdlcm provides array with [gcd, least common multiple]' do
       expect(6.gcdlcm(18)).to eq [6, 18]
     end
+
+    it '#lcm provides the least common multiple' do
+      expect(4.lcm(2)).to eq 4
+    end
+
+    it '#lcm and #gcd is always positive' do
+      expect(4.lcm(-2)).to eq 4
+    end
+
+    it '#next provides the int + 1' do
+      expect(5.next).to eq 6
+    end
+
+    it '#numerator provides self' do
+      expect(5.numerator).to eq 5
+    end
+
+    it '#odd? returns true if int is odd' do
+      expect(5.odd?).to be_true
+    end
+
+    it '#ord returns true if int is odd' do
+      expect(?a.ord).to eq 97
+    end
   end
 end
