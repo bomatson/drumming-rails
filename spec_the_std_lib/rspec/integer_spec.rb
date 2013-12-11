@@ -53,7 +53,7 @@ describe Integer do
       expect(4.lcm(-2)).to eq 4
     end
 
-    it '#next provides the int + 1' do
+    it '#next/succ provides the int + 1' do
       expect(5.next).to eq 6
     end
 
@@ -65,8 +65,20 @@ describe Integer do
       expect(5.odd?).to be_true
     end
 
-    it '#ord returns true if int is odd' do
+    it '#ord provides the integer value from char' do
       expect(?a.ord).to eq 97
+    end
+
+    it '#pred provides the int - 1' do
+      expect(5.pred).to eq 4
+    end
+
+    it '#round with a precision returns a float' do
+      expect(4.round(1)).to be_kind_of Float
+    end
+
+    it '#round with a negative precision rounds down' do
+      expect(12.round(-1)).to eq 10
     end
   end
 end
