@@ -80,5 +80,29 @@ describe Integer do
     it '#round with a negative precision rounds down' do
       expect(12.round(-1)).to eq 10
     end
+
+    it '#times without a block provides an enumerator' do
+      expect(23.times).to be_kind_of Enumerator
+    end
+
+    it '#times with a block passes values from 0 to int - 1' do
+      expect(
+        [].tap{ |out| 5.times{ |i| out << i } }
+      ).to eq [0, 1, 2, 3, 4]
+    end
+
+    it '#to_r provides value as a rational' do
+      expect(12.to_r).to eq 12/1
+    end
+
+    it '#upto without a block returns an Enumerator' do
+      expect(12.upto(15)).to be_kind_of Enumerator
+    end
+
+    it '#upto with a block passes increasing values from int including limit' do
+      expect(
+        [].tap { |out| 5.upto(9) { |i| out << i } }
+      ).to eq [5, 6, 7, 8, 9]
+    end
   end
 end
