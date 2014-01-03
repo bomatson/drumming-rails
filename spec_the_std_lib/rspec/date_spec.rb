@@ -94,6 +94,36 @@ describe Date do
           expect{ Date.commercial(2008, 3, 0).to_s }.to raise_error(ArgumentError)
         end
       end
+
+      context 'by parsing' do
+        let(:new_date) { '2001-01-10' }
+
+        subject { Date.parse(new_date) }
+
+        it 'transforms a string into a Date' do
+          expect(subject).to be_instance_of Date
+        end
+
+        it 'provides the same date as the string' do
+          expect(subject.to_s).to eq new_date
+        end
+
+        context 'with a string of only integers' do
+          let(:new_date) { '20010110' }
+
+          it 'provides the same date as the string' do
+            expect(subject.to_s).to eq '2001-01-10'
+          end
+        end
+
+        context 'with a written out month' do
+          let(:new_date) { '10 Jan 2001' }
+
+          it 'provides the same date as the string' do
+            expect(subject.to_s).to eq '2001-01-10'
+          end
+        end
+      end
     end
   end
 end
