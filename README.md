@@ -1,6 +1,6 @@
 # Drumming on Rails
 
-###An awesome learning experiment. Trading Rails lessons for drum lessons weekly w/ [@gilesbowkett](https://github.com/gilesbowkett)
+###A super fun learning experiment. Trading Rails lessons for drum lessons weekly w/ [@gilesbowkett](https://github.com/gilesbowkett)
 
 ![Bonham!](http://www.ajchen.com/wp-content/uploads/2010/06/JohnBonham.jpg)
 
